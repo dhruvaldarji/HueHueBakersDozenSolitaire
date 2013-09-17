@@ -116,8 +116,70 @@
     <Compile Include="Game1.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\x86\Debug\HueHueBakersDozenSolitaire.exe" />
+    <Content Include="bin\x86\Debug\HueHueBakersDozenSolitaire.pdb" />
+    <Content Include="Cards\Back1.bmp" />
+    <Content Include="Cards\Back2.bmp" />
+    <Content Include="Cards\ClubsAce.bmp" />
+    <Content Include="Cards\ClubsEight.bmp" />
+    <Content Include="Cards\ClubsFive.bmp" />
+    <Content Include="Cards\ClubsFour.bmp" />
+    <Content Include="Cards\ClubsJack.bmp" />
+    <Content Include="Cards\ClubsKing.bmp" />
+    <Content Include="Cards\ClubsNine.bmp" />
+    <Content Include="Cards\ClubsQueen.bmp" />
+    <Content Include="Cards\ClubsSeven.bmp" />
+    <Content Include="Cards\ClubsSix.bmp" />
+    <Content Include="Cards\ClubsTen.bmp" />
+    <Content Include="Cards\ClubsThree.bmp" />
+    <Content Include="Cards\ClubsTwo.bmp" />
+    <Content Include="Cards\DiamondsAce.bmp" />
+    <Content Include="Cards\DiamondsEight.bmp" />
+    <Content Include="Cards\DiamondsFive.bmp" />
+    <Content Include="Cards\DiamondsFour.bmp" />
+    <Content Include="Cards\DiamondsJack.bmp" />
+    <Content Include="Cards\DiamondsKing.bmp" />
+    <Content Include="Cards\DiamondsNine.bmp" />
+    <Content Include="Cards\DiamondsQueen.bmp" />
+    <Content Include="Cards\DiamondsSeven.bmp" />
+    <Content Include="Cards\DiamondsSix.bmp" />
+    <Content Include="Cards\DiamondsTen.bmp" />
+    <Content Include="Cards\DiamondsThree.bmp" />
+    <Content Include="Cards\DiamondsTwo.bmp" />
+    <Content Include="Cards\Empty1.bmp" />
+    <Content Include="Cards\Empty2.bmp" />
+    <Content Include="Cards\HeartsAce.bmp" />
+    <Content Include="Cards\HeartsEight.bmp" />
+    <Content Include="Cards\HeartsFive.bmp" />
+    <Content Include="Cards\HeartsFour.bmp" />
+    <Content Include="Cards\HeartsJack.bmp" />
+    <Content Include="Cards\HeartsKing.bmp" />
+    <Content Include="Cards\HeartsNine.bmp" />
+    <Content Include="Cards\HeartsQueen.bmp" />
+    <Content Include="Cards\HeartsSeven.bmp" />
+    <Content Include="Cards\HeartsSix.bmp" />
+    <Content Include="Cards\HeartsTen.bmp" />
+    <Content Include="Cards\HeartsThree.bmp" />
+    <Content Include="Cards\HeartsTwo.bmp" />
+    <Content Include="Cards\SpadesAce.bmp" />
+    <Content Include="Cards\SpadesEight.bmp" />
+    <Content Include="Cards\SpadesFive.bmp" />
+    <Content Include="Cards\SpadesFour.bmp" />
+    <Content Include="Cards\SpadesJack.bmp" />
+    <Content Include="Cards\SpadesKing.bmp" />
+    <Content Include="Cards\SpadesNine.bmp" />
+    <Content Include="Cards\SpadesQueen.bmp" />
+    <Content Include="Cards\SpadesSeven.bmp" />
+    <Content Include="Cards\SpadesSix.bmp" />
+    <Content Include="Cards\SpadesTen.bmp" />
+    <Content Include="Cards\SpadesThree.bmp" />
+    <Content Include="Cards\SpadesTwo.bmp" />
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
+    <Content Include="obj\x86\Debug\HueHueBakersDozenSolitaire.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\x86\Debug\HueHueBakersDozenSolitaire.exe" />
+    <Content Include="obj\x86\Debug\HueHueBakersDozenSolitaire.pdb" />
+    <Content Include="obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HueHueBakersDozenSolitaireContent\HueHueBakersDozenSolitaireContent.contentproj">
@@ -154,6 +216,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <None Include="obj\x86\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\x86\Debug\ResolveAssemblyReference.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\x86\Debug\Content\" />
+    <Folder Include="obj\x86\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
