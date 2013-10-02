@@ -19,6 +19,7 @@ namespace HueHueBakersDozenSolitaire
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         //Manuel was heres
+        //Kyle was here. Cool sprites.
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
