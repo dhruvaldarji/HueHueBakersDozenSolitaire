@@ -47,7 +47,21 @@ namespace HueHueBakersDozenSolitaire
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            Texture2D[] cardArray = new Texture2D[52];
+            cardArray[0] = Content.Load<Texture2D>("ClubsAce");
+            cardArray[1] = Content.Load<Texture2D>("ClubsTwo");
+            cardArray[2] = Content.Load<Texture2D>("ClubsThree");
+            cardArray[3] = Content.Load<Texture2D>("ClubsFour");
+            cardArray[4] = Content.Load<Texture2D>("ClubsFive");
+            cardArray[5] = Content.Load<Texture2D>("ClubsSix");
+            cardArray[6] = Content.Load<Texture2D>("ClubsSeven");
+            cardArray[7] = Content.Load<Texture2D>("ClubsEight");
+            cardArray[8] = Content.Load<Texture2D>("ClubsNine");
+            cardArray[9] = Content.Load<Texture2D>("ClubsTen");
+            cardArray[10] = Content.Load<Texture2D>("ClubsJack");
+            cardArray[11] = Content.Load<Texture2D>("ClubsQueen");
+            cardArray[12] = Content.Load<Texture2D>("ClubsKing");
+            cardArray[13] = Content.Load<Texture2D>("DiamondsAce");
             // TODO: use this.Content to load your game content here
         }
 
