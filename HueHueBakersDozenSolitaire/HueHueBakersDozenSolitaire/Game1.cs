@@ -18,6 +18,10 @@ namespace HueHueBakersDozenSolitaire
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Vector2 aceClubsV;
+        Texture2D ClubsAceT;
+        Rectangle BackgroundR;
+        Texture2D BGT;
         //Manuel was heres
         //Kyle was here. Cool sprites.
         public Game1()
@@ -35,7 +39,8 @@ namespace HueHueBakersDozenSolitaire
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            BackgroundR = new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            aceClubsV = new Vector2(45, 45);
             base.Initialize();
         }
 
@@ -46,6 +51,7 @@ namespace HueHueBakersDozenSolitaire
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
+            BGT = Content.Load<Texture2D>("Background");
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Texture2D[] cardArray = new Texture2D[52];
             cardArray[0] = Content.Load<Texture2D>("ClubsAce");
@@ -62,6 +68,7 @@ namespace HueHueBakersDozenSolitaire
             cardArray[11] = Content.Load<Texture2D>("ClubsQueen");
             cardArray[12] = Content.Load<Texture2D>("ClubsKing");
             cardArray[13] = Content.Load<Texture2D>("DiamondsAce");
+            ClubsAceT = Content.Load<Texture2D>("ClubsAce");
             // TODO: use this.Content to load your game content here
         }
 
@@ -84,6 +91,8 @@ namespace HueHueBakersDozenSolitaire
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                aceClubsV.X -= 5;
 
             // TODO: Add your update logic here
 
@@ -96,8 +105,13 @@ namespace HueHueBakersDozenSolitaire
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin();
+            spriteBatch.Draw(BGT, BackgroundR, Color.White);
+            spriteBatch.Draw(ClubsAceT, aceClubsV, Color.White);
 
+            spriteBatch.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
