@@ -22,6 +22,8 @@ namespace HueHueBakersDozenSolitaire
         Texture2D ClubsAceT;
         Rectangle BackgroundR;
         Texture2D BGT;
+        Vector2[] cardArrayV;
+        int i, j, k;
         //Manuel was heres
         //Kyle was here. Cool sprites.
         public Game1()
@@ -41,6 +43,19 @@ namespace HueHueBakersDozenSolitaire
             // TODO: Add your initialization logic here
             BackgroundR = new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             aceClubsV = new Vector2(45, 45);
+            //make array cylcle from 0 to 51, correct positioning of cards.
+            for (int k = 0; k <= 2; k++)
+            {
+                for (int i = 0; i <= 7; i++)
+                {
+                    for (int j = 0; j <= 4; j++)
+                    {
+                       
+                        cardArrayV[i] =  new Vector2(i*100*(k+1), j*10*(k+1+200));
+
+                    }
+                }
+            }
             base.Initialize();
         }
 
@@ -68,7 +83,48 @@ namespace HueHueBakersDozenSolitaire
             cardArray[11] = Content.Load<Texture2D>("ClubsQueen");
             cardArray[12] = Content.Load<Texture2D>("ClubsKing");
             cardArray[13] = Content.Load<Texture2D>("DiamondsAce");
+
             ClubsAceT = Content.Load<Texture2D>("ClubsAce");
+
+            cardArray[14] = Content.Load<Texture2D>("DiamondsTwo");
+            cardArray[15] = Content.Load<Texture2D>("DiamondsThree");
+            cardArray[16] = Content.Load<Texture2D>("DiamondsFour");
+            cardArray[17] = Content.Load<Texture2D>("DiamondsFive");
+            cardArray[18] = Content.Load<Texture2D>("DiamondsSix");
+            cardArray[19] = Content.Load<Texture2D>("DiamondsSeven");
+            cardArray[20] = Content.Load<Texture2D>("DiamondsEight");
+            cardArray[21] = Content.Load<Texture2D>("DiamondsNine");
+            cardArray[22] = Content.Load<Texture2D>("DiamondsTen");
+            cardArray[23] = Content.Load<Texture2D>("DiamondsJack");
+            cardArray[24] = Content.Load<Texture2D>("DiamondsQueen");
+            cardArray[25] = Content.Load<Texture2D>("DiamondsKing");
+            cardArray[26] = Content.Load<Texture2D>("HeartsAce");
+            cardArray[27] = Content.Load<Texture2D>("HeartsTwo");
+            cardArray[28] = Content.Load<Texture2D>("HeartsThree");
+            cardArray[29] = Content.Load<Texture2D>("HeartsFour");
+            cardArray[30] = Content.Load<Texture2D>("HeartsFive");
+            cardArray[31] = Content.Load<Texture2D>("HeartsSix");
+            cardArray[32] = Content.Load<Texture2D>("HeartsSeven");
+            cardArray[33] = Content.Load<Texture2D>("HeartsEight");
+            cardArray[34] = Content.Load<Texture2D>("HeartsNine");
+            cardArray[35] = Content.Load<Texture2D>("HeartsTen");
+            cardArray[36] = Content.Load<Texture2D>("HeartsJack");
+            cardArray[37] = Content.Load<Texture2D>("HeartsQueen");
+            cardArray[38] = Content.Load<Texture2D>("HeartsKing");
+            cardArray[39] = Content.Load<Texture2D>("SpadesAce");
+            cardArray[40] = Content.Load<Texture2D>("SpadesTwo");
+            cardArray[41] = Content.Load<Texture2D>("SpadesThree");
+            cardArray[42] = Content.Load<Texture2D>("SpadesFour");
+            cardArray[43] = Content.Load<Texture2D>("SpadesFive");
+            cardArray[44] = Content.Load<Texture2D>("SpadesSix");
+            cardArray[45] = Content.Load<Texture2D>("SpadesSeven");
+            cardArray[46] = Content.Load<Texture2D>("SpadesEight");
+            cardArray[47] = Content.Load<Texture2D>("SpadesNine");
+            cardArray[48] = Content.Load<Texture2D>("SpadesTen");
+            cardArray[49] = Content.Load<Texture2D>("SpadesJack");
+            cardArray[50] = Content.Load<Texture2D>("SpadesQueen");
+            cardArray[51] = Content.Load<Texture2D>("SpadesKing");
+
             // TODO: use this.Content to load your game content here
         }
 
