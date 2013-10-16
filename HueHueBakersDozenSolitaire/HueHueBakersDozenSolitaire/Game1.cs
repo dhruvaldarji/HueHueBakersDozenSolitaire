@@ -51,7 +51,7 @@ namespace HueHueBakersDozenSolitaire
                     for (int j = 0; j <= 4; j++)
                     {
                        
-                        cardArrayV[i] =  new Vector2(i*100*(k+1), j*10*(k+1+200));
+                     //   cardArrayV[i] =  new Vector2(i*100*(k+1), j*10*(k+1+200));
 
                     }
                 }
