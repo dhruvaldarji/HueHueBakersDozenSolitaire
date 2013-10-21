@@ -15,7 +15,9 @@ namespace HueHueBakersDozenSolitaire
     class Card
     {
         int value; // Num/Char (A,2,3,4,5,6,7,8,9,10,J,Q,K)
-        int suit; // Suit (Spade, Club, Heart, Diamond)
+        String suit; // Suit (Spade, Club, Heart, Diamond)
+        Texture2D cardSprite; // Image for the card
+        Vector2 vector; // Vector for moving sprite
 
         /// <summary>
         /// Main Card Object.
@@ -26,21 +28,25 @@ namespace HueHueBakersDozenSolitaire
         }
 
         /// <summary>
-        /// Main Card Object.
+        /// Main Card Object
         /// </summary>
-        /// <param name="s">Provides Card Suit.</param>
-        /// <param name="v">Provides Card Value</param>
-        public Card(int s, int v)
+        /// <param name="s"></param>
+        /// <param name="num"></param>
+        /// <param name="img"></param>
+        /// <param name="v"></param>
+        public Card(String s, int num, Texture2D img, Vector2 v)
         {
             suit = s;
-            value = v;
+            value = num;
+            cardSprite = img;
+            vector = v;
         }
 
         /// <summary>
         /// Get the Suit of a Card
         /// </summary>
         /// <returns>suit</returns>
-        public int getSuit()
+        public String getSuit()
         {
             return suit;
         }
@@ -49,7 +55,7 @@ namespace HueHueBakersDozenSolitaire
         /// Set the suit of a Card
         /// </summary>
         /// <param name="t"></param>
-        public void setSuit(int t)
+        public void setSuit(String t)
         {
             suit = t;
         }
@@ -70,6 +76,43 @@ namespace HueHueBakersDozenSolitaire
         public void setValue(int v)
         {
             value = v;
-        } 
+        }
+
+        /// <summary>
+        /// Get the image of the card
+        /// </summary>
+        /// <returns></returns>
+        public Texture2D getSprite()
+        {
+            return cardSprite;
+        }
+
+        /// <summary>
+        /// Set the image of a card
+        /// </summary>
+        /// <param name="img"></param>
+        public void setSprite(Texture2D img)
+        {
+            cardSprite = img;
+        }
+
+        /// <summary>
+        /// Get card vector
+        /// </summary>
+        /// <returns></returns>
+        public Vector2 getVector()
+        {
+            return vector;
+        }
+
+        /// <summary>
+        /// Set card vector
+        /// </summary>
+        /// <param name="v"></param>
+        public void setVector(Vector2 v)
+        {
+            vector = v;
+        }
+
     }
 }

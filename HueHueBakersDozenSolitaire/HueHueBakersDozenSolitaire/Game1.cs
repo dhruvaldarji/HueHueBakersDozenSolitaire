@@ -18,8 +18,19 @@ namespace HueHueBakersDozenSolitaire
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        //Test 
         Vector2 aceClubsV;
         Texture2D ClubsAceT;
+
+        // Dhruval's card dragging testing 
+        Card clubA;
+        Boolean dragging = false;
+        Boolean lastStatePressed = false;
+        int x;
+        int y;
+        ///////////////////////////////////
+
         Rectangle BackgroundR;
         Texture2D BGT;
         Vector2[] cardArrayV;
@@ -42,8 +53,12 @@ namespace HueHueBakersDozenSolitaire
         {
             // TODO: Add your initialization logic here
             BackgroundR = new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+
+            // Make mouse pointer visible
+            this.IsMouseVisible = true;
+
             aceClubsV = new Vector2(45, 45);
-            //make array cylcle from 0 to 51, correct positioning of cards.
+            //make array cycle from 0 to 51, correct positioning of cards.
             for (int k = 0; k <= 2; k++)
             {
                 for (int i = 0; i <= 7; i++)
@@ -51,7 +66,7 @@ namespace HueHueBakersDozenSolitaire
                     for (int j = 0; j <= 4; j++)
                     {
                        
-                     //   cardArrayV[i] =  new Vector2(i*100*(k+1), j*10*(k+1+200));
+                        //cardArrayV[i] =  new Vector2(i*100*(k+1), j*10*(k+1+200));
 
                     }
                 }
@@ -68,6 +83,14 @@ namespace HueHueBakersDozenSolitaire
             // Create a new SpriteBatch, which can be used to draw textures.
             BGT = Content.Load<Texture2D>("Background");
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            //testing
+            ClubsAceT = Content.Load<Texture2D>("ClubsAce");
+
+            clubA = new Card("Club", 0, Content.Load<Texture2D>("ClubsAce"), new Vector2(25,50));
+
+            ////////////////////////////////////////////////////////////////////////
+
             Texture2D[] cardArray = new Texture2D[52];
             cardArray[0] = Content.Load<Texture2D>("ClubsAce");
             cardArray[1] = Content.Load<Texture2D>("ClubsTwo");
@@ -83,9 +106,6 @@ namespace HueHueBakersDozenSolitaire
             cardArray[11] = Content.Load<Texture2D>("ClubsQueen");
             cardArray[12] = Content.Load<Texture2D>("ClubsKing");
             cardArray[13] = Content.Load<Texture2D>("DiamondsAce");
-
-            ClubsAceT = Content.Load<Texture2D>("ClubsAce");
-
             cardArray[14] = Content.Load<Texture2D>("DiamondsTwo");
             cardArray[15] = Content.Load<Texture2D>("DiamondsThree");
             cardArray[16] = Content.Load<Texture2D>("DiamondsFour");
@@ -144,14 +164,36 @@ namespace HueHueBakersDozenSolitaire
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            // get location of the mouse
+            x = Mouse.GetState().X;
+            y = Mouse.GetState().Y;
+
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
-                aceClubsV.X -= 5;
+            
+            // Pick the card up and move to mouse location when left clicked
+            if (dragging)
+            {
+                clubA.setVector(new Vector2(x, y));
+            }
+            // If dragging = false mouse left button is pressed, check if mouse is within card bounds.
+            else if (!dragging && (Mouse.GetState().LeftButton == ButtonState.Pressed))
+            {
+               if (clubA.getSprite().Bounds.Contains(new Point(x, y)))
+                {
+                    dragging = true;
+                    lastStatePressed = true;
+                }
+            }
 
-            // TODO: Add your update logic here
-
+            // Stop dragging if button is released and the last state of the button was pressed.
+            if (Mouse.GetState().LeftButton == ButtonState.Released && lastStatePressed == true)
+            {
+                dragging = false;
+                lastStatePressed = false;
+            }
+             
             base.Update(gameTime);
         }
 
@@ -165,7 +207,9 @@ namespace HueHueBakersDozenSolitaire
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             spriteBatch.Draw(BGT, BackgroundR, Color.White);
-            spriteBatch.Draw(ClubsAceT, aceClubsV, Color.White);
+            //spriteBatch.Draw(ClubsAceT, aceClubsV, Color.White);
+
+            spriteBatch.Draw(clubA.getSprite(), clubA.getVector(), Color.White);
 
             spriteBatch.End();
             // TODO: Add your drawing code here
