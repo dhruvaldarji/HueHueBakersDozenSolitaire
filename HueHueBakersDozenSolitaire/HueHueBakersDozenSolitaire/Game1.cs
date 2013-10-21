@@ -29,6 +29,10 @@ namespace HueHueBakersDozenSolitaire
         Boolean lastStatePressed = false;
         int x;
         int y;
+        int cardWidth = 72;
+        int cardHeight = 97;
+        int screenWidth = 800;
+        int screenHeight = 480;
         ///////////////////////////////////
 
         Rectangle BackgroundR;
@@ -171,29 +175,39 @@ namespace HueHueBakersDozenSolitaire
             // Allows the game to exit
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
-            
-            // Pick the card up and move to mouse location when left clicked
-            if (dragging)
-            {
-                clubA.setVector(new Vector2(x, y));
-            }
+
             // If dragging = false mouse left button is pressed, check if mouse is within card bounds.
             else if (!dragging && (Mouse.GetState().LeftButton == ButtonState.Pressed))
             {
-               if (clubA.getSprite().Bounds.Contains(new Point(x, y)))
+                // Create a reference rectangle for measurement reasons.
+                Rectangle r = new Rectangle((int)clubA.getVector().X, (int)clubA.getVector().Y, cardWidth, cardHeight);
+                
+                // If mouse pointer is within the bounds of the card then drag it.
+                if (r.Contains(new Point(x, y)))
                 {
                     dragging = true;
-                    lastStatePressed = true;
                 }
             }
 
             // Stop dragging if button is released and the last state of the button was pressed.
-            if (Mouse.GetState().LeftButton == ButtonState.Released && lastStatePressed == true)
+            if (Mouse.GetState().LeftButton == ButtonState.Released)
             {
                 dragging = false;
-                lastStatePressed = false;
             }
-             
+
+            // Pick the card up and move to mouse location when left clicked if true
+            if (dragging)
+            {
+                if ((x > 0) && (y > 0) && (x + cardWidth < screenWidth) && (y + cardHeight < screenHeight))
+                {
+                    clubA.setVector(new Vector2(x, y));
+                }
+            }
+
+            // Debug: Where is the mouse, sprite, and vector at. // The problem is that the sprite X and Y values always remain at 0.
+            System.Diagnostics.Debug.Print("Update: Mouse at: " + x + ", " + y+". Card at: "+clubA.getSprite().Bounds+". Vector at: "+clubA.getVector());
+
+
             base.Update(gameTime);
         }
 
@@ -209,7 +223,13 @@ namespace HueHueBakersDozenSolitaire
             spriteBatch.Draw(BGT, BackgroundR, Color.White);
             //spriteBatch.Draw(ClubsAceT, aceClubsV, Color.White);
 
-            spriteBatch.Draw(clubA.getSprite(), clubA.getVector(), Color.White);
+            Rectangle spritePosition = new Rectangle((int)clubA.getVector().X, (int)clubA.getVector().Y, (int)clubA.getSprite().Width, (int)clubA.getSprite().Height);
+            spriteBatch.Draw(clubA.getSprite(), spritePosition, Color.White);
+
+            //spriteBatch.Draw(clubA.getSprite(), clubA.getVector(), Color.White);
+
+            // Debug where is the sprite at
+            System.Diagnostics.Debug.Print("Draw: Sprite at:" + spritePosition);
 
             spriteBatch.End();
             // TODO: Add your drawing code here
