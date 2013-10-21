@@ -43,6 +43,13 @@ namespace HueHueBakersDozenSolitaire
             vector = v;
         }
 
+        public Card(String s, int num, Texture2D img)
+        {
+            suit = s;
+            value = num;
+            cardSprite = img;
+            vector = new Vector2(0, 0);
+        }
         /// <summary>
         /// Get the Suit of a Card
         /// </summary>
