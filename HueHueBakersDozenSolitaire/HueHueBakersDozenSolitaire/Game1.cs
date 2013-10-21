@@ -26,13 +26,13 @@ namespace HueHueBakersDozenSolitaire
         // Dhruval's card dragging testing 
         Card clubA;
         Boolean dragging = false;
-        Boolean lastStatePressed = false;
         int x;
         int y;
         int cardWidth = 72;
         int cardHeight = 97;
         int screenWidth = 800;
         int screenHeight = 480;
+        Deck testDeck = new Deck();
         ///////////////////////////////////
 
         Rectangle BackgroundR;
@@ -91,7 +91,8 @@ namespace HueHueBakersDozenSolitaire
             //testing
             ClubsAceT = Content.Load<Texture2D>("ClubsAce");
 
-            clubA = new Card("Club", 0, Content.Load<Texture2D>("ClubsAce"), new Vector2(25,50));
+            //clubA = new Card("Club", 0, Content.Load<Texture2D>("ClubsAce"), new Vector2(25,50));
+            testDeck.addCard(new Card("Club", 0, Content.Load<Texture2D>("ClubsAce"), new Vector2(25, 50)));
 
             ////////////////////////////////////////////////////////////////////////
 
@@ -177,11 +178,12 @@ namespace HueHueBakersDozenSolitaire
                 this.Exit();
 
             // If dragging = false mouse left button is pressed, check if mouse is within card bounds.
-            else if (!dragging && (Mouse.GetState().LeftButton == ButtonState.Pressed))
+            if (!dragging && (Mouse.GetState().LeftButton == ButtonState.Pressed))
             {
                 // Create a reference rectangle for measurement reasons.
-                Rectangle r = new Rectangle((int)clubA.getVector().X, (int)clubA.getVector().Y, cardWidth, cardHeight);
+                Rectangle r = new Rectangle((int)testDeck.getCard(0).getVector().X, (int)testDeck.getCard(0).getVector().Y, cardWidth, cardHeight);
                 
+
                 // If mouse pointer is within the bounds of the card then drag it.
                 if (r.Contains(new Point(x, y)))
                 {

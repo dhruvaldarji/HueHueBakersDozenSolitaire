@@ -20,5 +20,10 @@ namespace HueHueBakersDozenSolitaire
             cardArray[currentEmptyLocation] = x;
             currentEmptyLocation++;
         }
+
+        public Card getCard(int position)
+        {
+            return cardArray[position];
+        }
     }
 }
