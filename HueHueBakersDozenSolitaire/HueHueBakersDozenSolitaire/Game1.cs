@@ -24,7 +24,7 @@ namespace HueHueBakersDozenSolitaire
         Texture2D ClubsAceT;
 
         // Dhruval's card dragging testing 
-        Card clubA;
+        //Card testDeck.getCard(0);
         Boolean dragging = false;
         int x;
         int y;
@@ -91,8 +91,23 @@ namespace HueHueBakersDozenSolitaire
             //testing
             ClubsAceT = Content.Load<Texture2D>("ClubsAce");
 
-            //clubA = new Card("Club", 0, Content.Load<Texture2D>("ClubsAce"), new Vector2(25,50));
-            testDeck.addCard(new Card("Club", 0, Content.Load<Texture2D>("ClubsAce"), new Vector2(25, 50)));
+            //testDeck.getCard(0) = new Card("Club", 0, Content.Load<Texture2D>("ClubsAce"), new Vector2(25,50));
+            testDeck.addCard(new Card("Club", 0, Content.Load<Texture2D>("ClubsAce")));
+            testDeck.addCard(new Card("Club", 1, Content.Load<Texture2D>("ClubsTwo")));
+            testDeck.addCard(new Card("Club", 2, Content.Load<Texture2D>("ClubsThree")));
+            testDeck.addCard(new Card("Club", 3, Content.Load<Texture2D>("ClubsFour")));
+            testDeck.addCard(new Card("Club", 4, Content.Load<Texture2D>("ClubsFive")));
+            testDeck.addCard(new Card("Club", 5, Content.Load<Texture2D>("ClubsSix")));
+            testDeck.addCard(new Card("Club", 6, Content.Load<Texture2D>("ClubsSeven")));
+            testDeck.addCard(new Card("Club", 7, Content.Load<Texture2D>("ClubEight")));
+            testDeck.addCard(new Card("Club", 8, Content.Load<Texture2D>("ClubNine")));
+            testDeck.addCard(new Card("Club", 9, Content.Load<Texture2D>("ClubsTen")));
+            testDeck.addCard(new Card("Club", 10, Content.Load<Texture2D>("ClubsJack")));
+            testDeck.addCard(new Card("Club", 11, Content.Load<Texture2D>("ClubsQueen")));
+            testDeck.addCard(new Card("Club", 12, Content.Load<Texture2D>("ClubsKing")));
+            testDeck.addCard(new Card("Diamond", 13, Content.Load<Texture2D>("DiamondsAce")));
+            testDeck.addCard(new Card("Diamond", 14, Content.Load<Texture2D>("DiamondsTwo")));
+            testDeck.addCard(new Card("Diamond", 15, Content.Load<Texture2D>(DiamondsThree")));
 
             ////////////////////////////////////////////////////////////////////////
 
@@ -202,12 +217,12 @@ namespace HueHueBakersDozenSolitaire
             {
                 if ((x > 0) && (y > 0) && (x + cardWidth < screenWidth) && (y + cardHeight < screenHeight))
                 {
-                    clubA.setVector(new Vector2(x, y));
+                    testDeck.getCard(0).setVector(new Vector2(x, y));
                 }
             }
 
             // Debug: Where is the mouse, sprite, and vector at. // The problem is that the sprite X and Y values always remain at 0.
-            System.Diagnostics.Debug.Print("Update: Mouse at: " + x + ", " + y+". Card at: "+clubA.getSprite().Bounds+". Vector at: "+clubA.getVector());
+            System.Diagnostics.Debug.Print("Update: Mouse at: " + x + ", " + y+". Card at: "+testDeck.getCard(0).getSprite().Bounds+". Vector at: "+testDeck.getCard(0).getVector());
 
 
             base.Update(gameTime);
@@ -225,10 +240,10 @@ namespace HueHueBakersDozenSolitaire
             spriteBatch.Draw(BGT, BackgroundR, Color.White);
             //spriteBatch.Draw(ClubsAceT, aceClubsV, Color.White);
 
-            Rectangle spritePosition = new Rectangle((int)clubA.getVector().X, (int)clubA.getVector().Y, (int)clubA.getSprite().Width, (int)clubA.getSprite().Height);
-            spriteBatch.Draw(clubA.getSprite(), spritePosition, Color.White);
+            Rectangle spritePosition = new Rectangle((int)testDeck.getCard(0).getVector().X, (int)testDeck.getCard(0).getVector().Y, (int)testDeck.getCard(0).getSprite().Width, (int)testDeck.getCard(0).getSprite().Height);
+            spriteBatch.Draw(testDeck.getCard(0).getSprite(), spritePosition, Color.White);
 
-            //spriteBatch.Draw(clubA.getSprite(), clubA.getVector(), Color.White);
+            //spriteBatch.Draw(testDeck.getCard(0).getSprite(), testDeck.getCard(0).getVector(), Color.White);
 
             // Debug where is the sprite at
             System.Diagnostics.Debug.Print("Draw: Sprite at:" + spritePosition);
