@@ -60,7 +60,7 @@ namespace HueHueBakersDozenSolitaire
 
             // Make mouse pointer visible
             this.IsMouseVisible = true;
-
+            
             aceClubsV = new Vector2(45, 45);
             //make array cycle from 0 to 51, correct positioning of cards.
             for (int k = 0; k <= 2; k++)
