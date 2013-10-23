@@ -257,11 +257,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="SpadesAce.bmp">
-      <Name>SpadesAce</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="SpadesEight.bmp">
       <Name>SpadesEight</Name>
       <Importer>TextureImporter</Importer>
@@ -326,6 +321,13 @@
   <ItemGroup>
     <Compile Include="Background.PNG">
       <Name>Background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SpadesAce.bmp">
+      <Name>SpadesAce</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

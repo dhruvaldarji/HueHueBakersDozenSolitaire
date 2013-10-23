@@ -21,6 +21,7 @@ namespace HueHueBakersDozenSolitaire
 
         // Dhruval's card dragging testing 
         //Card testDeck.getCard(0);
+       
         Boolean dragging = false;
         int x;
         int y;
@@ -32,11 +33,10 @@ namespace HueHueBakersDozenSolitaire
         Card temp = new Card();
         Vector2[] testCardPlacement = new Vector2[52];
         ///////////////////////////////////
-
+        
         Rectangle BackgroundR;
         Texture2D BGT;
-        Vector2[] cardArrayV;
-        int i, j, k;
+        
         //Manuel was heres
         //Kyle was here. Cool sprites.
         public Game1()
@@ -45,6 +45,13 @@ namespace HueHueBakersDozenSolitaire
             Content.RootDirectory = "Content";
         }
 
+        public void screenSize(int width, int height)
+        {
+            graphics.PreferredBackBufferWidth = width;
+            graphics.PreferredBackBufferHeight = height;
+
+            graphics.ApplyChanges();
+        }
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -54,6 +61,8 @@ namespace HueHueBakersDozenSolitaire
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+
+           // screenSize(1080, 1080);
             BackgroundR = new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 
             // Make mouse pointer visible
@@ -193,7 +202,7 @@ namespace HueHueBakersDozenSolitaire
             testCardPlacement[50] = new Vector2(530, 340);
             testCardPlacement[51] = new Vector2(530, 360);
 
-            for (i = 0; i < 52; i++)
+            for (int i = 0; i < 52; i++)
             {
                 testDeck.getCard(i).setVector(testCardPlacement[i]);
             }
@@ -245,12 +254,13 @@ namespace HueHueBakersDozenSolitaire
             // Pick the card up and move to mouse location when left clicked if true
             if (dragging)
             {
-                if ((x > 0) && (y > 0) && (x + cardWidth < screenWidth) && (y + cardHeight < screenHeight))
+                if ((x > 0) && (y > 0) && (x + cardWidth/2 < screenWidth) && (y + cardHeight/2 < screenHeight + cardHeight/2))
                 {
-                    Vector2 v = new Vector2(x, y);
+                    Vector2 v = new Vector2(x- cardWidth/2, y - cardHeight/2);
                     temp.setVector(v);
                 }
             }
+           
 
             // Debug: Where is the mouse, sprite, and vector at. // The problem is that the sprite X and Y values always remain at 0.
              try
