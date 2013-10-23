@@ -277,24 +277,10 @@ namespace HueHueBakersDozenSolitaire
 
             spriteBatch.Draw(BGT, BackgroundR, Color.White);
             
-            Card drawCard = null;
-            Rectangle spritePosition = new Rectangle();
-
             for (int i = 0; i < 52; i = i + 1)
             {
                 spriteBatch.Draw(testDeck.getCard(i).getSprite(), testDeck.getCard(i).getVector(), Color.White);
             }
-            // Draw all the cards in the Deck
-            //for (int i = 0; i < testDeck.getDeckSize(); i++)
-            //{
-            //    drawCard = testDeck.getCard(i);
-
-            //    spritePosition = new Rectangle((int)drawCard.getVector().X, (int)drawCard.getVector().Y, cardWidth, cardHeight);
-            //    spriteBatch.Draw(drawCard.getSprite(), spritePosition, Color.White);
-            //}
-
-            // Debug where is the sprite at
-            System.Diagnostics.Debug.Print("Draw: Sprite at:" + spritePosition);
 
             spriteBatch.End();
             // TODO: Add your drawing code here
