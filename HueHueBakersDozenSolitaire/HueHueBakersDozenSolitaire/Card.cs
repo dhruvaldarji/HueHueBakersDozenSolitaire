@@ -18,6 +18,7 @@ namespace HueHueBakersDozenSolitaire
         String suit; // Suit (Spade, Club, Heart, Diamond)
         Texture2D cardSprite; // Image for the card
         Vector2 vector; // Vector for moving sprite
+        Boolean topCard = false; 
 
         /// <summary>
         /// Main Card Object.
@@ -121,5 +122,22 @@ namespace HueHueBakersDozenSolitaire
             vector = v;
         }
 
+        /// <summary>
+        /// Checks if the card is the top card
+        /// </summary>
+        /// <returns></returns>
+        public Boolean isTop()
+        {
+            return topCard;
+        }
+
+        /// <summary>
+        /// Determines if the card is the top card or not. 
+        /// </summary>
+        /// <param name="b"></param>
+        public void setTop(Boolean b)
+        {
+            topCard = b;
+        }
     }
 }

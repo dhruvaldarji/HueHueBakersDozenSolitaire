@@ -19,12 +19,8 @@ namespace HueHueBakersDozenSolitaire
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        //Test 
-        Vector2 aceClubsV;
-        Texture2D ClubsAceT;
-
         // Dhruval's card dragging testing 
-        Card clubA;
+        //Card testDeck.getCard(0);
         Boolean dragging = false;
         int x;
         int y;
@@ -33,6 +29,7 @@ namespace HueHueBakersDozenSolitaire
         int screenWidth = 800;
         int screenHeight = 480;
         Deck testDeck = new Deck();
+        Card temp = new Card();
         ///////////////////////////////////
 
         Rectangle BackgroundR;
@@ -60,8 +57,12 @@ namespace HueHueBakersDozenSolitaire
 
             // Make mouse pointer visible
             this.IsMouseVisible = true;
+<<<<<<< HEAD
             
             aceClubsV = new Vector2(45, 45);
+=======
+
+>>>>>>> 936190c9717277a3fe0ac494d9b68e07264a0c0d
             //make array cycle from 0 to 51, correct positioning of cards.
             for (int k = 0; k <= 2; k++)
             {
@@ -88,69 +89,59 @@ namespace HueHueBakersDozenSolitaire
             BGT = Content.Load<Texture2D>("Background");
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            //testing
-            ClubsAceT = Content.Load<Texture2D>("ClubsAce");
-
-            //clubA = new Card("Club", 0, Content.Load<Texture2D>("ClubsAce"), new Vector2(25,50));
-            testDeck.addCard(new Card("Club", 0, Content.Load<Texture2D>("ClubsAce"), new Vector2(25, 50)));
-
-            ////////////////////////////////////////////////////////////////////////
-
-            Texture2D[] cardArray = new Texture2D[52];
-            cardArray[0] = Content.Load<Texture2D>("ClubsAce");
-            cardArray[1] = Content.Load<Texture2D>("ClubsTwo");
-            cardArray[2] = Content.Load<Texture2D>("ClubsThree");
-            cardArray[3] = Content.Load<Texture2D>("ClubsFour");
-            cardArray[4] = Content.Load<Texture2D>("ClubsFive");
-            cardArray[5] = Content.Load<Texture2D>("ClubsSix");
-            cardArray[6] = Content.Load<Texture2D>("ClubsSeven");
-            cardArray[7] = Content.Load<Texture2D>("ClubsEight");
-            cardArray[8] = Content.Load<Texture2D>("ClubsNine");
-            cardArray[9] = Content.Load<Texture2D>("ClubsTen");
-            cardArray[10] = Content.Load<Texture2D>("ClubsJack");
-            cardArray[11] = Content.Load<Texture2D>("ClubsQueen");
-            cardArray[12] = Content.Load<Texture2D>("ClubsKing");
-            cardArray[13] = Content.Load<Texture2D>("DiamondsAce");
-            cardArray[14] = Content.Load<Texture2D>("DiamondsTwo");
-            cardArray[15] = Content.Load<Texture2D>("DiamondsThree");
-            cardArray[16] = Content.Load<Texture2D>("DiamondsFour");
-            cardArray[17] = Content.Load<Texture2D>("DiamondsFive");
-            cardArray[18] = Content.Load<Texture2D>("DiamondsSix");
-            cardArray[19] = Content.Load<Texture2D>("DiamondsSeven");
-            cardArray[20] = Content.Load<Texture2D>("DiamondsEight");
-            cardArray[21] = Content.Load<Texture2D>("DiamondsNine");
-            cardArray[22] = Content.Load<Texture2D>("DiamondsTen");
-            cardArray[23] = Content.Load<Texture2D>("DiamondsJack");
-            cardArray[24] = Content.Load<Texture2D>("DiamondsQueen");
-            cardArray[25] = Content.Load<Texture2D>("DiamondsKing");
-            cardArray[26] = Content.Load<Texture2D>("HeartsAce");
-            cardArray[27] = Content.Load<Texture2D>("HeartsTwo");
-            cardArray[28] = Content.Load<Texture2D>("HeartsThree");
-            cardArray[29] = Content.Load<Texture2D>("HeartsFour");
-            cardArray[30] = Content.Load<Texture2D>("HeartsFive");
-            cardArray[31] = Content.Load<Texture2D>("HeartsSix");
-            cardArray[32] = Content.Load<Texture2D>("HeartsSeven");
-            cardArray[33] = Content.Load<Texture2D>("HeartsEight");
-            cardArray[34] = Content.Load<Texture2D>("HeartsNine");
-            cardArray[35] = Content.Load<Texture2D>("HeartsTen");
-            cardArray[36] = Content.Load<Texture2D>("HeartsJack");
-            cardArray[37] = Content.Load<Texture2D>("HeartsQueen");
-            cardArray[38] = Content.Load<Texture2D>("HeartsKing");
-            cardArray[39] = Content.Load<Texture2D>("SpadesAce");
-            cardArray[40] = Content.Load<Texture2D>("SpadesTwo");
-            cardArray[41] = Content.Load<Texture2D>("SpadesThree");
-            cardArray[42] = Content.Load<Texture2D>("SpadesFour");
-            cardArray[43] = Content.Load<Texture2D>("SpadesFive");
-            cardArray[44] = Content.Load<Texture2D>("SpadesSix");
-            cardArray[45] = Content.Load<Texture2D>("SpadesSeven");
-            cardArray[46] = Content.Load<Texture2D>("SpadesEight");
-            cardArray[47] = Content.Load<Texture2D>("SpadesNine");
-            cardArray[48] = Content.Load<Texture2D>("SpadesTen");
-            cardArray[49] = Content.Load<Texture2D>("SpadesJack");
-            cardArray[50] = Content.Load<Texture2D>("SpadesQueen");
-            cardArray[51] = Content.Load<Texture2D>("SpadesKing");
-
-            // TODO: use this.Content to load your game content here
+            //testDeck.getCard(0) = new Card("Club", 0, Content.Load<Texture2D>("ClubsAce"), new Vector2(25,50));
+            testDeck.addCard(new Card("Club", 1, Content.Load<Texture2D>("ClubsAce")));
+            testDeck.addCard(new Card("Club", 2, Content.Load<Texture2D>("ClubsTwo")));
+            testDeck.addCard(new Card("Club", 3, Content.Load<Texture2D>("ClubsThree")));
+            testDeck.addCard(new Card("Club", 4, Content.Load<Texture2D>("ClubsFour")));
+            testDeck.addCard(new Card("Club", 5, Content.Load<Texture2D>("ClubsFive")));
+            testDeck.addCard(new Card("Club", 6, Content.Load<Texture2D>("ClubsSix")));
+            testDeck.addCard(new Card("Club", 7, Content.Load<Texture2D>("ClubsSeven")));
+            testDeck.addCard(new Card("Club", 8, Content.Load<Texture2D>("ClubsEight")));
+            testDeck.addCard(new Card("Club", 9, Content.Load<Texture2D>("ClubsNine")));
+            testDeck.addCard(new Card("Club", 10, Content.Load<Texture2D>("ClubsTen")));
+            testDeck.addCard(new Card("Club", 11, Content.Load<Texture2D>("ClubsJack")));
+            testDeck.addCard(new Card("Club", 12, Content.Load<Texture2D>("ClubsQueen")));
+            testDeck.addCard(new Card("Club", 13, Content.Load<Texture2D>("ClubsKing")));
+            testDeck.addCard(new Card("Diamond", 1, Content.Load<Texture2D>("DiamondsAce")));
+            testDeck.addCard(new Card("Diamond", 2, Content.Load<Texture2D>("DiamondsTwo")));
+            testDeck.addCard(new Card("Diamond", 3, Content.Load<Texture2D>("DiamondsThree")));
+            testDeck.addCard(new Card("Diamond", 4, Content.Load<Texture2D>("DiamondsFour")));
+            testDeck.addCard(new Card("Diamond", 5, Content.Load<Texture2D>("DiamondsFive")));
+            testDeck.addCard(new Card("Diamond", 6, Content.Load<Texture2D>("DiamondsSix")));
+            testDeck.addCard(new Card("Diamond", 7, Content.Load<Texture2D>("DiamondsSeven")));
+            testDeck.addCard(new Card("Diamond", 8, Content.Load<Texture2D>("DiamondsEight")));
+            testDeck.addCard(new Card("Diamond", 9, Content.Load<Texture2D>("DiamondsNine")));
+            testDeck.addCard(new Card("Diamond", 10, Content.Load<Texture2D>("DiamondsTen")));
+            testDeck.addCard(new Card("Diamond", 11, Content.Load<Texture2D>("DiamondsJack")));
+            testDeck.addCard(new Card("Diamond", 12, Content.Load<Texture2D>("DiamondsQueen")));
+            testDeck.addCard(new Card("Diamond", 13, Content.Load<Texture2D>("DiamondsKing")));
+            testDeck.addCard(new Card("Hearts", 1, Content.Load<Texture2D>("HeartsAce")));
+            testDeck.addCard(new Card("Hearts", 2, Content.Load<Texture2D>("HeartsTwo")));
+            testDeck.addCard(new Card("Hearts", 3, Content.Load<Texture2D>("HeartsThree")));
+            testDeck.addCard(new Card("Hearts", 4, Content.Load<Texture2D>("HeartsFour")));
+            testDeck.addCard(new Card("Hearts", 5, Content.Load<Texture2D>("HeartsFive")));
+            testDeck.addCard(new Card("Hearts", 6, Content.Load<Texture2D>("HeartsSix")));
+            testDeck.addCard(new Card("Hearts", 7, Content.Load<Texture2D>("HeartsSeven")));
+            testDeck.addCard(new Card("Hearts", 8, Content.Load<Texture2D>("HeartsEight")));
+            testDeck.addCard(new Card("Hearts", 9, Content.Load<Texture2D>("HeartsNine")));
+            testDeck.addCard(new Card("Hearts", 10, Content.Load<Texture2D>("HeartsTen")));
+            testDeck.addCard(new Card("Hearts", 11, Content.Load<Texture2D>("HeartsJack")));
+            testDeck.addCard(new Card("Hearts", 12, Content.Load<Texture2D>("HeartsQueen")));
+            testDeck.addCard(new Card("Hearts", 13, Content.Load<Texture2D>("HeartsKing")));
+            testDeck.addCard(new Card("Spades", 1, Content.Load<Texture2D>("SpadesAce")));
+            testDeck.addCard(new Card("Spades", 2, Content.Load<Texture2D>("SpadesTwo")));
+            testDeck.addCard(new Card("Spades", 3, Content.Load<Texture2D>("SpadesThree")));
+            testDeck.addCard(new Card("Spades", 4, Content.Load<Texture2D>("SpadesFour")));
+            testDeck.addCard(new Card("Spades", 5, Content.Load<Texture2D>("SpadesFive")));
+            testDeck.addCard(new Card("Spades", 6, Content.Load<Texture2D>("SpadesSix")));
+            testDeck.addCard(new Card("Spades", 7, Content.Load<Texture2D>("SpadesSeven")));
+            testDeck.addCard(new Card("Spades", 8, Content.Load<Texture2D>("SpadesEight")));
+            testDeck.addCard(new Card("Spades", 9, Content.Load<Texture2D>("SpadesNine")));
+            testDeck.addCard(new Card("Spades", 10, Content.Load<Texture2D>("SpadesTen")));
+            testDeck.addCard(new Card("Spades", 11, Content.Load<Texture2D>("SpadesJack")));
+            testDeck.addCard(new Card("Spades", 12, Content.Load<Texture2D>("SpadesQueen")));
+            testDeck.addCard(new Card("Spades", 13, Content.Load<Texture2D>("SpadesKing")));
         }
 
         /// <summary>
@@ -181,11 +172,10 @@ namespace HueHueBakersDozenSolitaire
             if (!dragging && (Mouse.GetState().LeftButton == ButtonState.Pressed))
             {
                 // Create a reference rectangle for measurement reasons.
-                Rectangle r = new Rectangle((int)testDeck.getCard(0).getVector().X, (int)testDeck.getCard(0).getVector().Y, cardWidth, cardHeight);
-                
+                temp = testDeck.getCardAtBounds(x, y);
 
-                // If mouse pointer is within the bounds of the card then drag it.
-                if (r.Contains(new Point(x, y)))
+                // If card exist under mouse pointer.
+                if (temp!=null)
                 {
                     dragging = true;
                 }
@@ -202,13 +192,20 @@ namespace HueHueBakersDozenSolitaire
             {
                 if ((x > 0) && (y > 0) && (x + cardWidth < screenWidth) && (y + cardHeight < screenHeight))
                 {
-                    clubA.setVector(new Vector2(x, y));
+                    Vector2 v = new Vector2(x, y);
+                    temp.setVector(v);
                 }
             }
 
             // Debug: Where is the mouse, sprite, and vector at. // The problem is that the sprite X and Y values always remain at 0.
-            System.Diagnostics.Debug.Print("Update: Mouse at: " + x + ", " + y+". Card at: "+clubA.getSprite().Bounds+". Vector at: "+clubA.getVector());
-
+             try
+                {
+                    System.Diagnostics.Debug.Print("Update: Mouse at: " + x + ", " + y + ". Card at: " + temp.getSprite().Bounds + ". Vector at: " + temp.getVector());
+                }
+                catch (Exception)
+                {
+                    System.Diagnostics.Debug.Print("Update: Mouse at: " + x + ", " + y + ". Card is Null");
+                }
 
             base.Update(gameTime);
         }
@@ -222,13 +219,20 @@ namespace HueHueBakersDozenSolitaire
             
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
+
             spriteBatch.Draw(BGT, BackgroundR, Color.White);
-            //spriteBatch.Draw(ClubsAceT, aceClubsV, Color.White);
+            
+            Card drawCard = null;
+            Rectangle spritePosition = new Rectangle();
 
-            Rectangle spritePosition = new Rectangle((int)clubA.getVector().X, (int)clubA.getVector().Y, (int)clubA.getSprite().Width, (int)clubA.getSprite().Height);
-            spriteBatch.Draw(clubA.getSprite(), spritePosition, Color.White);
+            // Draw all the cards in the Deck
+            for (int i = 0; i < testDeck.getDeckSize(); i++)
+            {
+                drawCard = testDeck.getCard(i);
 
-            //spriteBatch.Draw(clubA.getSprite(), clubA.getVector(), Color.White);
+                spritePosition = new Rectangle((int)drawCard.getVector().X, (int)drawCard.getVector().Y, cardWidth, cardHeight);
+                spriteBatch.Draw(drawCard.getSprite(), spritePosition, Color.White);
+            }
 
             // Debug where is the sprite at
             System.Diagnostics.Debug.Print("Draw: Sprite at:" + spritePosition);
