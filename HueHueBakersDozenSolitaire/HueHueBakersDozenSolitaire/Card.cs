@@ -18,7 +18,7 @@ namespace HueHueBakersDozenSolitaire
         String suit; // Suit (Spade, Club, Heart, Diamond)
         Texture2D cardSprite; // Image for the card
         Vector2 vector; // Vector for moving sprite
-        Boolean topCard = false; 
+        Boolean topCard; 
 
         /// <summary>
         /// Main Card Object.
@@ -41,6 +41,7 @@ namespace HueHueBakersDozenSolitaire
             value = num;
             cardSprite = img;
             vector = v;
+            topCard = false;
         }
 
         public Card(String s, int num, Texture2D img)
@@ -49,7 +50,12 @@ namespace HueHueBakersDozenSolitaire
             value = num;
             cardSprite = img;
             vector = new Vector2(0, 0);
+            topCard = false;
         }
+
+
+
+
         /// <summary>
         /// Get the Suit of a Card
         /// </summary>

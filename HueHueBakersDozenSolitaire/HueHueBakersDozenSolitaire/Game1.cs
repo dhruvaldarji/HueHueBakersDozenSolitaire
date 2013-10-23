@@ -30,6 +30,7 @@ namespace HueHueBakersDozenSolitaire
         int screenHeight = 480;
         Deck testDeck = new Deck();
         Card temp = new Card();
+        Vector2[] testCardPlacement = new Vector2[52];
         ///////////////////////////////////
 
         Rectangle BackgroundR;
@@ -57,12 +58,7 @@ namespace HueHueBakersDozenSolitaire
 
             // Make mouse pointer visible
             this.IsMouseVisible = true;
-<<<<<<< HEAD
-            
-            aceClubsV = new Vector2(45, 45);
-=======
 
->>>>>>> 936190c9717277a3fe0ac494d9b68e07264a0c0d
             //make array cycle from 0 to 51, correct positioning of cards.
             for (int k = 0; k <= 2; k++)
             {
@@ -142,6 +138,65 @@ namespace HueHueBakersDozenSolitaire
             testDeck.addCard(new Card("Spades", 11, Content.Load<Texture2D>("SpadesJack")));
             testDeck.addCard(new Card("Spades", 12, Content.Load<Texture2D>("SpadesQueen")));
             testDeck.addCard(new Card("Spades", 13, Content.Load<Texture2D>("SpadesKing")));
+
+            //This sets the vectors for all of the above mentioned cards.
+            testCardPlacement[0] = new Vector2(25, 65);
+            testCardPlacement[1] = new Vector2(25, 85);
+            testCardPlacement[2] = new Vector2(25, 105);
+            testCardPlacement[3] = new Vector2(25, 125);
+            testCardPlacement[4] = new Vector2(120, 65);
+            testCardPlacement[5] = new Vector2(120, 85);
+            testCardPlacement[6] = new Vector2(120, 105);
+            testCardPlacement[7] = new Vector2(120, 125);
+            testCardPlacement[8] = new Vector2(210, 65);
+            testCardPlacement[9] = new Vector2(210, 85);
+            testCardPlacement[10] = new Vector2(210, 105);
+            testCardPlacement[11] = new Vector2(210, 125);
+            testCardPlacement[12] = new Vector2(300, 65);
+            testCardPlacement[13] = new Vector2(300, 85);
+            testCardPlacement[14] = new Vector2(300, 105);
+            testCardPlacement[15] = new Vector2(300, 125);
+            testCardPlacement[16] = new Vector2(390, 65);
+            testCardPlacement[17] = new Vector2(390, 85);
+            testCardPlacement[18] = new Vector2(390, 105);
+            testCardPlacement[19] = new Vector2(390, 125);
+            testCardPlacement[20] = new Vector2(485, 65);
+            testCardPlacement[21] = new Vector2(485, 85);
+            testCardPlacement[22] = new Vector2(485, 105);
+            testCardPlacement[23] = new Vector2(485, 125);
+            testCardPlacement[24] = new Vector2(580, 65);
+            testCardPlacement[25] = new Vector2(580, 85);
+            testCardPlacement[26] = new Vector2(580, 105);
+            testCardPlacement[27] = new Vector2(580, 125);
+            testCardPlacement[28] = new Vector2(75, 300);
+            testCardPlacement[29] = new Vector2(75, 320);
+            testCardPlacement[30] = new Vector2(75, 340);
+            testCardPlacement[31] = new Vector2(75, 360);
+            testCardPlacement[32] = new Vector2(165, 300);
+            testCardPlacement[33] = new Vector2(165, 320);
+            testCardPlacement[34] = new Vector2(165, 340);
+            testCardPlacement[35] = new Vector2(165, 360);
+            testCardPlacement[36] = new Vector2(255, 300);
+            testCardPlacement[37] = new Vector2(255, 320);
+            testCardPlacement[38] = new Vector2(255, 340);
+            testCardPlacement[39] = new Vector2(255, 360);
+            testCardPlacement[40] = new Vector2(350, 300);
+            testCardPlacement[41] = new Vector2(350, 320);
+            testCardPlacement[42] = new Vector2(350, 340);
+            testCardPlacement[43] = new Vector2(350, 360);
+            testCardPlacement[44] = new Vector2(445, 300);
+            testCardPlacement[45] = new Vector2(445, 320);
+            testCardPlacement[46] = new Vector2(445, 340);
+            testCardPlacement[47] = new Vector2(445, 360);
+            testCardPlacement[48] = new Vector2(530, 300);
+            testCardPlacement[49] = new Vector2(530, 320);
+            testCardPlacement[50] = new Vector2(530, 340);
+            testCardPlacement[51] = new Vector2(530, 360);
+
+            for (i = 0; i < 52; i++)
+            {
+                testDeck.getCard(i).setVector(testCardPlacement[i]);
+            }
         }
 
         /// <summary>
@@ -225,14 +280,18 @@ namespace HueHueBakersDozenSolitaire
             Card drawCard = null;
             Rectangle spritePosition = new Rectangle();
 
-            // Draw all the cards in the Deck
-            for (int i = 0; i < testDeck.getDeckSize(); i++)
+            for (int i = 0; i < 52; i = i + 1)
             {
-                drawCard = testDeck.getCard(i);
-
-                spritePosition = new Rectangle((int)drawCard.getVector().X, (int)drawCard.getVector().Y, cardWidth, cardHeight);
-                spriteBatch.Draw(drawCard.getSprite(), spritePosition, Color.White);
+                spriteBatch.Draw(testDeck.getCard(i).getSprite(), testDeck.getCard(i).getVector(), Color.White);
             }
+            // Draw all the cards in the Deck
+            //for (int i = 0; i < testDeck.getDeckSize(); i++)
+            //{
+            //    drawCard = testDeck.getCard(i);
+
+            //    spritePosition = new Rectangle((int)drawCard.getVector().X, (int)drawCard.getVector().Y, cardWidth, cardHeight);
+            //    spriteBatch.Draw(drawCard.getSprite(), spritePosition, Color.White);
+            //}
 
             // Debug where is the sprite at
             System.Diagnostics.Debug.Print("Draw: Sprite at:" + spritePosition);
