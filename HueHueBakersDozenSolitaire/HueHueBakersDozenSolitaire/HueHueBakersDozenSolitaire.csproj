@@ -181,6 +181,7 @@
     <Content Include="obj\x86\Debug\HueHueBakersDozenSolitaire.exe" />
     <Content Include="obj\x86\Debug\HueHueBakersDozenSolitaire.pdb" />
     <Content Include="obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt" />
+    <Content Include="Untitled.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HueHueBakersDozenSolitaireContent\HueHueBakersDozenSolitaireContent.contentproj">

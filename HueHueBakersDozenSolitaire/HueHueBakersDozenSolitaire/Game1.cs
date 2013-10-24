@@ -69,17 +69,9 @@ namespace HueHueBakersDozenSolitaire
             this.IsMouseVisible = true;
 
             //make array cycle from 0 to 51, correct positioning of cards.
-            for (int k = 0; k <= 2; k++)
+            for (int k = 0; k < 52; k++)
             {
-                for (int i = 0; i <= 7; i++)
-                {
-                    for (int j = 0; j <= 4; j++)
-                    {
-                       
-                        //cardArrayV[i] =  new Vector2(i*100*(k+1), j*10*(k+1+200));
-
-                    }
-                }
+               // Card card = new Card("penis", 5, new object());
             }
             base.Initialize();
         }
@@ -91,10 +83,11 @@ namespace HueHueBakersDozenSolitaire
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            BGT = Content.Load<Texture2D>("Background");
+            BGT = Content.Load<Texture2D>("Untitled");
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //testDeck.getCard(0) = new Card("Club", 0, Content.Load<Texture2D>("ClubsAce"), new Vector2(25,50));
+
             testDeck.addCard(new Card("Club", 1, Content.Load<Texture2D>("ClubsAce")));
             testDeck.addCard(new Card("Club", 2, Content.Load<Texture2D>("ClubsTwo")));
             testDeck.addCard(new Card("Club", 3, Content.Load<Texture2D>("ClubsThree")));
