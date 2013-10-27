@@ -50,7 +50,7 @@ namespace HueHueBakersDozenSolitaire
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public Card getCardAtBounds(int x, int y)
+        public Card getCardAtBounds(int x, int y) 
         {
             for (int i = 0; i < cardArray.Length; i++)
             {
