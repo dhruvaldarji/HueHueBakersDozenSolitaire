@@ -195,8 +195,23 @@ namespace HueHueBakersDozenSolitaire
             testCardPlacement[50] = new Vector2(530, 340);
             testCardPlacement[51] = new Vector2(530, 360);
 
+
+            Random r = new Random();
+            int j =0;
+            int[] randArray = new int[52];
+            while(j < 52)
+            {
+                int n = r.Next(0, 51);
+                if (n != randArray[j])
+                {
+                    testDeck.getCard(j).setVector(testCardPlacement[n]);
+                    j++;
+                }
+            
+            }
             for (int i = 0; i < 52; i++)
             {
+                
                 testDeck.getCard(i).setVector(testCardPlacement[i]);
             }
         }
