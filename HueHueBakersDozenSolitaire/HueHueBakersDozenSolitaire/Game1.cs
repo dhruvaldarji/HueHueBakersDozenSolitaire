@@ -219,28 +219,28 @@ namespace HueHueBakersDozenSolitaire
             Texture2D tableuBG = Content.Load<Texture2D>("Empty2");
 
             // Make Tableus
-            gameTableus.Add(new Tableu(0, tableuBG, new Vector2(0, 0)));
-            gameTableus.Add(new Tableu(1, tableuBG, new Vector2(72, 0)));
-            gameTableus.Add(new Tableu(2, tableuBG, new Vector2(144, 0)));
-            gameTableus.Add(new Tableu(3, tableuBG, new Vector2(218, 0)));
-            gameTableus.Add(new Tableu(4, tableuBG, new Vector2(290, 0)));
-            gameTableus.Add(new Tableu(5, tableuBG, new Vector2(362, 0)));
-            gameTableus.Add(new Tableu(6, tableuBG, new Vector2(434, 0)));
-            gameTableus.Add(new Tableu(7, tableuBG, new Vector2(506, 0)));
-            gameTableus.Add(new Tableu(8, tableuBG, new Vector2(578, 0)));
-            gameTableus.Add(new Tableu(9, tableuBG, new Vector2(650, 0)));
-            gameTableus.Add(new Tableu(10, tableuBG, new Vector2(692, 0)));
-            gameTableus.Add(new Tableu(11, tableuBG, new Vector2(764, 0)));
-            gameTableus.Add(new Tableu(12, tableuBG, new Vector2(836, 0)));
+            gameTableus.Add(new Tableu(0, tableuBG, new Vector2(24, 14)));
+            gameTableus.Add(new Tableu(1, tableuBG, new Vector2(118, 14)));
+            gameTableus.Add(new Tableu(2, tableuBG, new Vector2(210, 14)));
+            gameTableus.Add(new Tableu(3, tableuBG, new Vector2(300, 14)));
+            gameTableus.Add(new Tableu(4, tableuBG, new Vector2(394, 14)));
+            gameTableus.Add(new Tableu(5, tableuBG, new Vector2(484, 14)));
+            gameTableus.Add(new Tableu(6, tableuBG, new Vector2(580, 14)));
+            gameTableus.Add(new Tableu(7, tableuBG, new Vector2(72, 275)));
+            gameTableus.Add(new Tableu(8, tableuBG, new Vector2(166, 275)));
+            gameTableus.Add(new Tableu(9, tableuBG, new Vector2(258, 275)));
+            gameTableus.Add(new Tableu(10, tableuBG, new Vector2(350, 275)));
+            gameTableus.Add(new Tableu(11, tableuBG, new Vector2(442, 275)));
+            gameTableus.Add(new Tableu(12, tableuBG, new Vector2(534, 275)));
 
 
             for (int i = 0; i < gameTableus.Count; i++)
             {
-                for (int j = 0; j < 4; j++)
+                for (int m = 0; m < 4; m++)
                 {
-                    System.Diagnostics.Debug.Print(((4 * i) + j) + " - I: " + i + ", J: " + j + ", Adding Card: " + testDeck.getCard((4 * i) + j).toString() + " to Tableu " + (gameTableus.ElementAt(i).toString()));
+                    System.Diagnostics.Debug.Print(((4 * i) + m) + " - I: " + i + ", M: " + m + ", Adding Card: " + testDeck.getCard((4 * i) + m).toString() + " to Tableu " + (gameTableus.ElementAt(i).toString()));
                     // Add Card to Tableu
-                    gameTableus.ElementAt(i).addCardToTableu(testDeck.getCard((4 * i) + j));
+                    gameTableus.ElementAt(i).addCardToTableu(testDeck.getCard((4 * i) + m));
                     
                 }
             }
@@ -274,9 +274,14 @@ namespace HueHueBakersDozenSolitaire
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
+            Boolean draggedToTableu = false;
+
             // If dragging = false mouse left button is pressed, check if mouse is within card bounds.
             if (!dragging && (Mouse.GetState().LeftButton == ButtonState.Pressed))
             {
+                tempTableu = null;
+                temp = null;
+
                 // Create a reference rectangle for measurement reasons.
                 for (int i = 0; i < gameTableus.Count; i++)
                 {
@@ -284,13 +289,12 @@ namespace HueHueBakersDozenSolitaire
                     {
                         tempTableu = gameTableus.ElementAt(i);
                     }
-                    
                 }
-                
-                temp = tempTableu.getTableuCard(tempTableu.getTableuSize()-1);
+
+                if( tempTableu != null) temp = tempTableu.getTableuCard(tempTableu.getTableuSize()-1);
 
                 // If card exist under mouse pointer.
-                if (temp!=null)
+                if (temp!=null && tempTableu != null)
                 {
                     dragging = true;
                 }
@@ -298,27 +302,28 @@ namespace HueHueBakersDozenSolitaire
 
             // Stop dragging if button is released and the last state of the button was pressed.
             if (dragging && Mouse.GetState().LeftButton == ButtonState.Released)
-            {
-                Boolean notOnTableu = false;
+            { 
+                dragging = false;
+
                 // Moving card to Tableus
                 for (int i = 0; i < gameTableus.Count; i++)
                 {
                     if (gameTableus.ElementAt(i).contains(new Vector2(x, y)))
                     {
                         // moved to a new Tableu
+                        draggedToTableu = true;
                         gameTableus.ElementAt(i).addCardToTableu(temp);
                         tempTableu.removeCard(temp);
                     }
-
-                    notOnTableu = false;
                 }
 
-                if (notOnTableu)
+                if (draggedToTableu == false)
                 {
-                    temp.setVector(tempTableu.getTableuVector());
+                    tempTableu.addCardToTableu(temp);
+                    tempTableu.removeCard(temp);
                 }
 
-                dragging = false;
+               
             }
 
             // Pick the card up and move to mouse location when left clicked if true
@@ -331,7 +336,6 @@ namespace HueHueBakersDozenSolitaire
                 }
             }
            
-
             // Debug: Where is the mouse, sprite, and vector at.
              try
                 {

@@ -73,7 +73,7 @@ namespace HueHueBakersDozenSolitaire
         /// <param name="x"></param>
         public void addCardToTableu(Card c)
         {
-            c.setVector(new Vector2((int)tableuVector.X, (int)tableuVector.Y+(getTableuSize()*10)));
+            c.setVector(new Vector2((int)tableuVector.X, (int)tableuVector.Y+(getTableuSize()*20)));
             tableuList.Add(c);
         }
 
@@ -100,7 +100,14 @@ namespace HueHueBakersDozenSolitaire
         /// <returns></returns>
         public Card getTableuCard(int i)
         {
-            return tableuList.ElementAt(i);
+            try
+            {
+                return tableuList.ElementAt(i);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -110,7 +117,7 @@ namespace HueHueBakersDozenSolitaire
         /// <returns></returns>
         public Boolean contains(Vector2 v)
         {
-            int height = ((tableuList.Count-1)*10+87);
+            int height = ((tableuList.Count-1)*20+77);
             Rectangle c = new Rectangle((int)tableuVector.X, (int)tableuVector.Y, 72, 97);
             if (c.Contains((int)v.X, (int)v.Y))
             {
