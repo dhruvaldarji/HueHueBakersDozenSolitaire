@@ -3,12 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 
 namespace HueHueBakersDozenSolitaire
 {
@@ -53,8 +48,25 @@ namespace HueHueBakersDozenSolitaire
             topCard = false;
         }
 
+        /// <summary>
+        /// String representation of Card
+        /// </summary>
+        /// <returns></returns>
+        public String toString()
+        {
+            string c = value.ToString();
 
+            switch (c)
+            {
+                case "1": c = "Ace"; break;
+                case "11": c = "Jack"; break;
+                case "12": c = "Queen"; break;
+                case "13": c = "King"; break;
 
+            }
+
+            return c +" of "+ suit;
+        }
 
         /// <summary>
         /// Get the Suit of a Card
@@ -144,6 +156,20 @@ namespace HueHueBakersDozenSolitaire
         public void setTop(Boolean b)
         {
             topCard = b;
+        }
+
+        /// <summary>
+        /// Check if Card equals another card.
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public Boolean equals(Card c)
+        {
+            if ((suit.Equals(c.getSuit())) && (value == c.getValue()))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

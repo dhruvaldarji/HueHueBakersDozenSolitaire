@@ -9,22 +9,34 @@ namespace HueHueBakersDozenSolitaire
   
     class Deck
     {
-        Card[] cardArray;
-        int currentEmptyLocation = 0;
+
+        private List<Card> cardList;
+        
+        /// <summary>
+        /// Deck constructor
+        /// </summary>
         public Deck()
         {
-            cardArray = new Card[52];
-
+            cardList = new List<Card>();
         }
-        public void addCard(Card x)
+
+        /// <summary>
+        /// Add card c to list
+        /// </summary>
+        /// <param name="x"></param>
+        public void addCard(Card c)
         {
-            cardArray[currentEmptyLocation] = x;
-            currentEmptyLocation++;
+            cardList.Add(c);
         }
 
+        /// <summary>
+        /// Get card at position
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
         public Card getCard(int position)
         {
-            return cardArray[position];
+            return cardList.ElementAt(position);
         }
 
         /// <summary>
@@ -34,11 +46,11 @@ namespace HueHueBakersDozenSolitaire
         /// <returns></returns>
         public Card getCardAtVector(Vector2 v)
         {
-            for(int i = 0;i<cardArray.Length;i++)
+            for(int i = 0;i<cardList.Count;i++)
             {
-                if( cardArray[i].getVector().Equals(v))
+                if( cardList.ElementAt(i).getVector().Equals(v))
                 {
-                    return cardArray[i];
+                    return cardList.ElementAt(i);
                 }
             }
             return null;
@@ -52,16 +64,25 @@ namespace HueHueBakersDozenSolitaire
         /// <returns></returns>
         public Card getCardAtBounds(int x, int y) 
         {
-            for (int i = 0; i < cardArray.Length; i++)
+            for (int i = 0; i < cardList.Count; i++)
             {
-                Rectangle r = new Rectangle((int)cardArray[i].getVector().X, (int)cardArray[i].getVector().Y, 72, 97);
+                Rectangle r = new Rectangle((int) cardList.ElementAt(i).getVector().X, (int)cardList.ElementAt(i).getVector().Y, 72, 97);
 
                 if (r.Contains(new Point(x,y)))
                 {
-                    return cardArray[i];
+                    return cardList.ElementAt(i);
                 }
             }
             return null;
+        }
+
+        /// <summary>
+        /// Remove card from Deck
+        /// </summary>
+        /// <param name="position"></param>
+        public void removeCard(int position)
+        {
+            cardList.RemoveAt(position);
         }
 
         /// <summary>
@@ -70,7 +91,7 @@ namespace HueHueBakersDozenSolitaire
         /// <returns></returns>
         public int getDeckSize()
         {
-            return cardArray.Length;
+            return cardList.Count;
         }
     }
 }

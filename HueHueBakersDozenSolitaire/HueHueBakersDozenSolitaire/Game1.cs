@@ -18,10 +18,10 @@ namespace HueHueBakersDozenSolitaire
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Rectangle BackgroundR;
+        Texture2D BGT;
 
-        // Dhruval's card dragging testing 
-        //Card testDeck.getCard(0);
-       
+        // Game Testing
         Boolean dragging = false;
         int x;
         int y;
@@ -30,21 +30,23 @@ namespace HueHueBakersDozenSolitaire
         int screenWidth = 800;
         int screenHeight = 480;
         Deck testDeck = new Deck();
+        List<Tableu> gameTableus = new List<Tableu>();
         Card temp = new Card();
-        Vector2[] testCardPlacement = new Vector2[52];
-        ///////////////////////////////////
+        Tableu tempTableu;
+        Vector2[] testCardPlacement = new Vector2[52]; 
+        ///////////////////////////////////////////////////
         
-        Rectangle BackgroundR;
-        Texture2D BGT;
-        
-        //Manuel was heres
-        //Kyle was here. Cool sprites.
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
 
+        /// <summary>
+        /// Set the size of the screen,
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         public void screenSize(int width, int height)
         {
             graphics.PreferredBackBufferWidth = width;
@@ -52,6 +54,7 @@ namespace HueHueBakersDozenSolitaire
 
             graphics.ApplyChanges();
         }
+
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -60,9 +63,7 @@ namespace HueHueBakersDozenSolitaire
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
-           // screenSize(1080, 1080);
+            // Background Rectangle
             BackgroundR = new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 
             // Make mouse pointer visible
@@ -71,8 +72,9 @@ namespace HueHueBakersDozenSolitaire
             //make array cycle from 0 to 51, correct positioning of cards.
             for (int k = 0; k < 52; k++)
             {
-               // Card card = new Card("penis", 5, new object());
+               ////////////////////////
             }
+
             base.Initialize();
         }
 
@@ -85,8 +87,6 @@ namespace HueHueBakersDozenSolitaire
             // Create a new SpriteBatch, which can be used to draw textures.
             BGT = Content.Load<Texture2D>("Untitled");
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            //testDeck.getCard(0) = new Card("Club", 0, Content.Load<Texture2D>("ClubsAce"), new Vector2(25,50));
 
             testDeck.addCard(new Card("Club", 1, Content.Load<Texture2D>("ClubsAce")));
             testDeck.addCard(new Card("Club", 2, Content.Load<Texture2D>("ClubsTwo")));
@@ -214,6 +214,40 @@ namespace HueHueBakersDozenSolitaire
                 
                 testDeck.getCard(i).setVector(testCardPlacement[i]);
             }
+
+            // Texture for tableu
+            Texture2D tableuBG = Content.Load<Texture2D>("Empty2");
+
+            // Make Tableus
+            gameTableus.Add(new Tableu(0, tableuBG, new Vector2(0, 0)));
+            gameTableus.Add(new Tableu(1, tableuBG, new Vector2(72, 0)));
+            gameTableus.Add(new Tableu(2, tableuBG, new Vector2(144, 0)));
+            gameTableus.Add(new Tableu(3, tableuBG, new Vector2(218, 0)));
+            gameTableus.Add(new Tableu(4, tableuBG, new Vector2(290, 0)));
+            gameTableus.Add(new Tableu(5, tableuBG, new Vector2(362, 0)));
+            gameTableus.Add(new Tableu(6, tableuBG, new Vector2(434, 0)));
+            gameTableus.Add(new Tableu(7, tableuBG, new Vector2(506, 0)));
+            gameTableus.Add(new Tableu(8, tableuBG, new Vector2(578, 0)));
+            gameTableus.Add(new Tableu(9, tableuBG, new Vector2(650, 0)));
+            gameTableus.Add(new Tableu(10, tableuBG, new Vector2(692, 0)));
+            gameTableus.Add(new Tableu(11, tableuBG, new Vector2(764, 0)));
+            gameTableus.Add(new Tableu(12, tableuBG, new Vector2(836, 0)));
+
+
+            for (int i = 0; i < gameTableus.Count; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    System.Diagnostics.Debug.Print(((4 * i) + j) + " - I: " + i + ", J: " + j + ", Adding Card: " + testDeck.getCard((4 * i) + j).toString() + " to Tableu " + (gameTableus.ElementAt(i).toString()));
+                    // Add Card to Tableu
+                    gameTableus.ElementAt(i).addCardToTableu(testDeck.getCard((4 * i) + j));
+                    
+                }
+            }
+
+            // Empty Deck by creating new instance.
+            testDeck = new Deck();
+
         }
 
         /// <summary>
@@ -244,7 +278,16 @@ namespace HueHueBakersDozenSolitaire
             if (!dragging && (Mouse.GetState().LeftButton == ButtonState.Pressed))
             {
                 // Create a reference rectangle for measurement reasons.
-                temp = testDeck.getCardAtBounds(x, y);
+                for (int i = 0; i < gameTableus.Count; i++)
+                {
+                    if(gameTableus.ElementAt(i).contains(new Vector2(x,y)))
+                    {
+                        tempTableu = gameTableus.ElementAt(i);
+                    }
+                    
+                }
+                
+                temp = tempTableu.getTableuCard(tempTableu.getTableuSize()-1);
 
                 // If card exist under mouse pointer.
                 if (temp!=null)
@@ -254,8 +297,27 @@ namespace HueHueBakersDozenSolitaire
             }
 
             // Stop dragging if button is released and the last state of the button was pressed.
-            if (Mouse.GetState().LeftButton == ButtonState.Released)
+            if (dragging && Mouse.GetState().LeftButton == ButtonState.Released)
             {
+                Boolean notOnTableu = false;
+                // Moving card to Tableus
+                for (int i = 0; i < gameTableus.Count; i++)
+                {
+                    if (gameTableus.ElementAt(i).contains(new Vector2(x, y)))
+                    {
+                        // moved to a new Tableu
+                        gameTableus.ElementAt(i).addCardToTableu(temp);
+                        tempTableu.removeCard(temp);
+                    }
+
+                    notOnTableu = false;
+                }
+
+                if (notOnTableu)
+                {
+                    temp.setVector(tempTableu.getTableuVector());
+                }
+
                 dragging = false;
             }
 
@@ -270,7 +332,7 @@ namespace HueHueBakersDozenSolitaire
             }
            
 
-            // Debug: Where is the mouse, sprite, and vector at. // The problem is that the sprite X and Y values always remain at 0.
+            // Debug: Where is the mouse, sprite, and vector at.
              try
                 {
                     System.Diagnostics.Debug.Print("Update: Mouse at: " + x + ", " + y + ". Card at: " + temp.getSprite().Bounds + ". Vector at: " + temp.getVector());
@@ -295,13 +357,23 @@ namespace HueHueBakersDozenSolitaire
 
             spriteBatch.Draw(BGT, BackgroundR, Color.White);
             
-            for (int i = 0; i < 52; i = i + 1)
+            //// Draw Deck
+            //for (int i = 0; i < 52; i = i + 1)
+            //{
+            //    spriteBatch.Draw(testDeck.getCard(i).getSprite(), testDeck.getCard(i).getVector(), Color.White);
+            //}
+
+            // Draw Tableus
+            for (int i = 0; i < gameTableus.Count; i++)
             {
-                spriteBatch.Draw(testDeck.getCard(i).getSprite(), testDeck.getCard(i).getVector(), Color.White);
+                for (int j = 0; j < gameTableus.ElementAt(i).getTableuSize(); j++)
+                {
+                    Card tempDraw = gameTableus.ElementAt(i).getTableuCard(j);
+                    spriteBatch.Draw(tempDraw.getSprite(), tempDraw.getVector(), Color.White);
+                }
             }
 
             spriteBatch.End();
-            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }
