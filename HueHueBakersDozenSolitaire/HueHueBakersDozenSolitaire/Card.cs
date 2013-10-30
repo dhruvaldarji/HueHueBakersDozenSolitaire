@@ -171,5 +171,20 @@ namespace HueHueBakersDozenSolitaire
             }
             return false;
         }
+
+        /// <summary>
+        /// Check if card is 1 less than given card
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public Boolean is1LessThan(Card c)
+        {
+            if (getValue()-c.getValue() == 1)
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }

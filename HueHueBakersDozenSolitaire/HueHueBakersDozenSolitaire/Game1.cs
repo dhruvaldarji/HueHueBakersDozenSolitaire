@@ -308,12 +308,19 @@ namespace HueHueBakersDozenSolitaire
                 // Moving card to Tableus
                 for (int i = 0; i < gameTableus.Count; i++)
                 {
-                    if (gameTableus.ElementAt(i).contains(new Vector2(x, y)))
+                   if (gameTableus.ElementAt(i).contains(new Vector2(x, y)))
                     {
-                        // moved to a new Tableu
-                        draggedToTableu = true;
-                        gameTableus.ElementAt(i).addCardToTableu(temp);
-                        tempTableu.removeCard(temp);
+                        // check if move is valid
+                        // topCard is not null (tableu is not empty)
+                        // dragged card is 1 less than topCard
+                        if (gameTableus.ElementAt(i).getTopCard() != null && gameTableus.ElementAt(i).getTopCard().is1LessThan(temp))
+                        {
+                            // moved to a new Tableu
+                            draggedToTableu = true;
+                            tempTableu.removeCard(temp);
+                            gameTableus.ElementAt(i).addCardToTableu(temp);
+                            
+                        }
                     }
                 }
 
@@ -375,6 +382,12 @@ namespace HueHueBakersDozenSolitaire
                     Card tempDraw = gameTableus.ElementAt(i).getTableuCard(j);
                     spriteBatch.Draw(tempDraw.getSprite(), tempDraw.getVector(), Color.White);
                 }
+            }
+
+            // Draw the card currently in hand
+            if (dragging && temp != null)
+            {
+                spriteBatch.Draw(temp.getSprite(), temp.getVector(), Color.White);
             }
 
             spriteBatch.End();
