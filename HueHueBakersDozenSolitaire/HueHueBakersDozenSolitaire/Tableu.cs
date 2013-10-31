@@ -10,6 +10,30 @@ namespace HueHueBakersDozenSolitaire
     class Tableu
     {
         /// <summary>
+        /// Construct a new Tableu with Texture at Vector
+        /// </summary>
+        public Tableu()
+        {
+            tableuList = new List<Card>();
+            tableuVector = new Vector2(0, 0);
+            tableuName = 0;
+        }
+
+        /// <summary>
+        /// Construct new Tableu at Vector (0,0)
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="t"></param>
+        /// <param name="v"></param>
+        public Tableu(int name, Texture2D t, Vector2 v)
+        {
+            tableuList = new List<Card>();
+            tableuName = name;
+            tableuTexture = t;
+            tableuVector = v;
+        }
+        
+        /// <summary>
         /// List of cards in Tableu
         /// </summary>
         public List<Card> tableuList;
@@ -28,30 +52,6 @@ namespace HueHueBakersDozenSolitaire
         /// Vector of Tableu
         /// </summary>
         public Vector2 tableuVector;
-
-        /// <summary>
-        /// Construct a new Tableu with Texture at Vector
-        /// </summary>
-        public Tableu()
-        {
-            tableuList = new List<Card>();
-            tableuVector = new Vector2(0, 0);
-            tableuName = 0;
-        }
-        
-        /// <summary>
-        /// Construct new Tableu at Vector (0,0)
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="t"></param>
-        /// <param name="v"></param>
-        public Tableu(int name, Texture2D t, Vector2 v)
-        {
-            tableuList = new List<Card>();
-            tableuName = name;
-            tableuTexture = t;
-            tableuVector = v;
-        }
 
         /// <summary>
         /// String representation of Tableu
@@ -77,11 +77,13 @@ namespace HueHueBakersDozenSolitaire
 
             for (int i = 0; i < getTableuSize(); i++)
             {
-                if (tableuList.ElementAt(i).equals(c))
+                if (tableuList.ElementAt(i).Equals(c))
                 {
                     inTableu = true;
+                    break;
                 }
             }
+
             if (inTableu)
             {
                 c.setVector(new Vector2((int)tableuVector.X, (int)tableuVector.Y + ((getTableuSize()-1) * 20)));
@@ -201,7 +203,69 @@ namespace HueHueBakersDozenSolitaire
         /// <returns></returns>
         public Card getTopCard()
         {
-            return tableuList.ElementAt(tableuList.Count - 1);
+            try
+            {
+                return tableuList.ElementAt(tableuList.Count - 1);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// If this tableu has a king in it, then make it the bottom most card.
+        /// </summary>
+        public void makeKingBottom()
+        {
+            Card king = new Card();
+            List<Card> tempTableu = new List<Card>();
+            int pos = 0;
+            Boolean isKing = false;
+
+           // Find where king is
+            for (int i = 0; i < getTableuSize(); i++)
+            {
+                if (tableuList.ElementAt(i).isKing())
+                {
+                    king = new Card(tableuList.ElementAt(i).getSuit(), tableuList.ElementAt(i).getValue(), tableuList.ElementAt(i).getSprite());
+                    pos = i;
+                    isKing = true;
+                    break;
+                }
+            }
+
+            if (isKing)
+            {
+                //Remove king
+                tableuList.RemoveAt(pos);
+
+                // Make temp Tableu
+                tempTableu.AddRange(tableuList);
+
+                // Empty tableu list;
+                tableuList.RemoveRange(0, tableuList.Count);
+
+                // Add king
+                addCardToTableu(king);
+
+                for (int i = 0; i < tempTableu.Count; i++)
+                {
+                    if (tempTableu.ElementAt(i) != null) addCardToTableu(tempTableu.ElementAt(i));
+                } 
+            }
+               
+        }
+
+        /// <summary>
+        /// Check if tableu is empty
+        /// </summary>
+        /// <returns></returns>
+        public Boolean isEmpty()
+        {
+            if (getTableuSize() == 0) return true;
+            else return false;
         }
 
     }

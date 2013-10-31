@@ -111,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Card.cs" />
+    <Compile Include="Foundation.cs" />
     <Compile Include="Tableu.cs" />
     <Compile Include="Deck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

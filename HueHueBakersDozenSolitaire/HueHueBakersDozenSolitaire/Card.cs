@@ -13,7 +13,6 @@ namespace HueHueBakersDozenSolitaire
         String suit; // Suit (Spade, Club, Heart, Diamond)
         Texture2D cardSprite; // Image for the card
         Vector2 vector; // Vector for moving sprite
-        Boolean topCard; 
 
         /// <summary>
         /// Main Card Object.
@@ -36,7 +35,6 @@ namespace HueHueBakersDozenSolitaire
             value = num;
             cardSprite = img;
             vector = v;
-            topCard = false;
         }
 
         public Card(String s, int num, Texture2D img)
@@ -45,7 +43,6 @@ namespace HueHueBakersDozenSolitaire
             value = num;
             cardSprite = img;
             vector = new Vector2(0, 0);
-            topCard = false;
         }
 
         /// <summary>
@@ -141,35 +138,18 @@ namespace HueHueBakersDozenSolitaire
         }
 
         /// <summary>
-        /// Checks if the card is the top card
-        /// </summary>
-        /// <returns></returns>
-        public Boolean isTop()
-        {
-            return topCard;
-        }
-
-        /// <summary>
-        /// Determines if the card is the top card or not. 
-        /// </summary>
-        /// <param name="b"></param>
-        public void setTop(Boolean b)
-        {
-            topCard = b;
-        }
-
-        /// <summary>
         /// Check if Card equals another card.
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
-        public Boolean equals(Card c)
+        public Boolean Equals(Card c)
         {
-            if ((suit.Equals(c.getSuit())) && (value == c.getValue()))
+            if (c == null) return false;
+            else if ((suit.Equals(c.getSuit())) && (value == c.getValue()))
             {
                 return true;
             }
-            return false;
+            else return false;
         }
 
         /// <summary>
@@ -184,6 +164,65 @@ namespace HueHueBakersDozenSolitaire
                 return true;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Check if card is 1 More than given card
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public Boolean is1MoreThan(Card c)
+        {
+            if (c.getValue()-getValue() == 1)
+            {
+                return true;
+            }
+            return false;
+        }
+        
+        /// <summary>
+        /// Checks if suit matches
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public Boolean suitMatches(Card c)
+        {
+            if (suit.Equals(c.getSuit()))
+            {
+                return true;
+            }
+            else return false;
+        }
+
+        /// <summary>
+        /// Check if values match
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public Boolean valueMatches(Card c)
+        {
+            if (getValue() == c.getValue()) return true;
+            else return false;
+        }
+
+        /// <summary>
+        /// Check if card is Ace
+        /// </summary>
+        /// <returns></returns>
+        public Boolean isAce()
+        {
+            if (value == 1) return true;
+            else return false; 
+        }
+
+        /// <summary>
+        /// Check if card is king
+        /// </summary>
+        /// <returns></returns>
+        public Boolean isKing()
+        {
+            if (value == 13) return true;
+            else return false; 
         }
 
     }

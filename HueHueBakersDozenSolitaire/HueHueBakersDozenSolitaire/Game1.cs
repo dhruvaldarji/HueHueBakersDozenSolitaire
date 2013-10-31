@@ -31,15 +31,23 @@ namespace HueHueBakersDozenSolitaire
         int screenHeight = 480;
         Deck testDeck = new Deck();
         List<Tableu> gameTableus = new List<Tableu>();
+        List<Foundation> gameFoundations = new List<Foundation>();
         Card temp = new Card();
         Tableu tempTableu;
-        Vector2[] testCardPlacement = new Vector2[52]; 
+        Vector2[] testCardPlacement = new Vector2[52];
+        Boolean readyToPlay = false;
         ///////////////////////////////////////////////////
         
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+
+            if (FoundationsAreFull())
+            {
+                // Win Game!!!!
+            }
         }
 
         /// <summary>
@@ -69,12 +77,6 @@ namespace HueHueBakersDozenSolitaire
             // Make mouse pointer visible
             this.IsMouseVisible = true;
 
-            //make array cycle from 0 to 51, correct positioning of cards.
-            for (int k = 0; k < 52; k++)
-            {
-               ////////////////////////
-            }
-
             base.Initialize();
         }
 
@@ -88,6 +90,26 @@ namespace HueHueBakersDozenSolitaire
             BGT = Content.Load<Texture2D>("Untitled");
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            LoadCards();
+
+            // Still in testing
+            // RandomizeDeck();
+
+            SetupTableus();
+
+            SetupFoundations();
+
+            MoveKings();
+
+            readyToPlay = true;
+
+        }
+
+        /// <summary>
+        /// Load cards into testDeck
+        /// </summary>
+        private void LoadCards()
+        {
             testDeck.addCard(new Card("Club", 1, Content.Load<Texture2D>("ClubsAce")));
             testDeck.addCard(new Card("Club", 2, Content.Load<Texture2D>("ClubsTwo")));
             testDeck.addCard(new Card("Club", 3, Content.Load<Texture2D>("ClubsThree")));
@@ -140,66 +162,19 @@ namespace HueHueBakersDozenSolitaire
             testDeck.addCard(new Card("Spades", 11, Content.Load<Texture2D>("SpadesJack")));
             testDeck.addCard(new Card("Spades", 12, Content.Load<Texture2D>("SpadesQueen")));
             testDeck.addCard(new Card("Spades", 13, Content.Load<Texture2D>("SpadesKing")));
+        }
 
-            //This sets the vectors for all of the above mentioned cards.
-            testCardPlacement[0] = new Vector2(25, 65);
-            testCardPlacement[1] = new Vector2(25, 85);
-            testCardPlacement[2] = new Vector2(25, 105);
-            testCardPlacement[3] = new Vector2(25, 125);
-            testCardPlacement[4] = new Vector2(120, 65);
-            testCardPlacement[5] = new Vector2(120, 85);
-            testCardPlacement[6] = new Vector2(120, 105);
-            testCardPlacement[7] = new Vector2(120, 125);
-            testCardPlacement[8] = new Vector2(210, 65);
-            testCardPlacement[9] = new Vector2(210, 85);
-            testCardPlacement[10] = new Vector2(210, 105);
-            testCardPlacement[11] = new Vector2(210, 125);
-            testCardPlacement[12] = new Vector2(300, 65);
-            testCardPlacement[13] = new Vector2(300, 85);
-            testCardPlacement[14] = new Vector2(300, 105);
-            testCardPlacement[15] = new Vector2(300, 125);
-            testCardPlacement[16] = new Vector2(390, 65);
-            testCardPlacement[17] = new Vector2(390, 85);
-            testCardPlacement[18] = new Vector2(390, 105);
-            testCardPlacement[19] = new Vector2(390, 125);
-            testCardPlacement[20] = new Vector2(485, 65);
-            testCardPlacement[21] = new Vector2(485, 85);
-            testCardPlacement[22] = new Vector2(485, 105);
-            testCardPlacement[23] = new Vector2(485, 125);
-            testCardPlacement[24] = new Vector2(580, 65);
-            testCardPlacement[25] = new Vector2(580, 85);
-            testCardPlacement[26] = new Vector2(580, 105);
-            testCardPlacement[27] = new Vector2(580, 125);
-            testCardPlacement[28] = new Vector2(75, 300);
-            testCardPlacement[29] = new Vector2(75, 320);
-            testCardPlacement[30] = new Vector2(75, 340);
-            testCardPlacement[31] = new Vector2(75, 360);
-            testCardPlacement[32] = new Vector2(165, 300);
-            testCardPlacement[33] = new Vector2(165, 320);
-            testCardPlacement[34] = new Vector2(165, 340);
-            testCardPlacement[35] = new Vector2(165, 360);
-            testCardPlacement[36] = new Vector2(255, 300);
-            testCardPlacement[37] = new Vector2(255, 320);
-            testCardPlacement[38] = new Vector2(255, 340);
-            testCardPlacement[39] = new Vector2(255, 360);
-            testCardPlacement[40] = new Vector2(350, 300);
-            testCardPlacement[41] = new Vector2(350, 320);
-            testCardPlacement[42] = new Vector2(350, 340);
-            testCardPlacement[43] = new Vector2(350, 360);
-            testCardPlacement[44] = new Vector2(445, 300);
-            testCardPlacement[45] = new Vector2(445, 320);
-            testCardPlacement[46] = new Vector2(445, 340);
-            testCardPlacement[47] = new Vector2(445, 360);
-            testCardPlacement[48] = new Vector2(530, 300);
-            testCardPlacement[49] = new Vector2(530, 320);
-            testCardPlacement[50] = new Vector2(530, 340);
-            testCardPlacement[51] = new Vector2(530, 360);
+        /// <summary>
+        /// Randomize the deck
+        /// </summary>
+        private void RandomizeDeck()
+        {
 
-
+            // Randomize deck
             Random r = new Random();
-            int j =0;
+            int j = 0;
             int[] randArray = new int[52];
-            while(j < 52)
+            while (j < 52)
             {
                 int n = r.Next(0, 51);
                 if (n != randArray[j])
@@ -207,14 +182,20 @@ namespace HueHueBakersDozenSolitaire
                     testDeck.getCard(j).setVector(testCardPlacement[n]);
                     j++;
                 }
-            
+
             }
             for (int i = 0; i < 52; i++)
             {
-                
+
                 testDeck.getCard(i).setVector(testCardPlacement[i]);
             }
+        }
 
+        /// <summary>
+        /// Set up the tableus
+        /// </summary>
+        private void SetupTableus()
+        {
             // Texture for tableu
             Texture2D tableuBG = Content.Load<Texture2D>("Empty2");
 
@@ -233,21 +214,63 @@ namespace HueHueBakersDozenSolitaire
             gameTableus.Add(new Tableu(11, tableuBG, new Vector2(442, 275)));
             gameTableus.Add(new Tableu(12, tableuBG, new Vector2(534, 275)));
 
-
+            // Add cards to tableu from testDeck
             for (int i = 0; i < gameTableus.Count; i++)
             {
                 for (int m = 0; m < 4; m++)
                 {
-                    System.Diagnostics.Debug.Print(((4 * i) + m) + " - I: " + i + ", M: " + m + ", Adding Card: " + testDeck.getCard((4 * i) + m).toString() + " to Tableu " + (gameTableus.ElementAt(i).toString()));
+                   // System.Diagnostics.Debug.Print(((4 * i) + m) + " - I: " + i + ", M: " + m + ", Adding Card: " + testDeck.getCard((4 * i) + m).toString() + " to Tableu " + (gameTableus.ElementAt(i).toString()));
                     // Add Card to Tableu
                     gameTableus.ElementAt(i).addCardToTableu(testDeck.getCard((4 * i) + m));
-                    
                 }
             }
 
             // Empty Deck by creating new instance.
             testDeck = new Deck();
+        }
 
+        /// <summary>
+        /// Setup the foundations
+        /// </summary>
+        private void SetupFoundations()
+        {
+            // Texture for tableu
+            Texture2D foundationBG = Content.Load<Texture2D>("Empty2");
+
+            // Make Foundations
+            gameFoundations.Add(new Foundation(0, foundationBG, new Vector2(706, 14)));
+            gameFoundations.Add(new Foundation(1, foundationBG, new Vector2(706, 141)));
+            gameFoundations.Add(new Foundation(2, foundationBG, new Vector2(706, 261)));
+            gameFoundations.Add(new Foundation(3, foundationBG, new Vector2(706, 372)));
+        }
+
+        /// <summary>
+        /// Make all kings the bottom most card of the tableus
+        /// </summary>
+        private void MoveKings()
+        {
+            for (int i = 0; i < gameTableus.Count; i++)
+            {
+                // Make it the first card in the tableu
+                gameTableus.ElementAt(i).makeKingBottom();
+            }
+        }
+
+
+        private Boolean FoundationsAreFull()
+        {
+            int counter = 0; 
+
+            for (int i = 0; i < gameFoundations.Count; i++)
+            {
+                if (gameFoundations.ElementAt(i).isFull())
+                {
+                    counter++;
+                }
+            }
+
+            if (counter == 3) return true;
+            else return false;
         }
 
         /// <summary>
@@ -275,14 +298,15 @@ namespace HueHueBakersDozenSolitaire
                 this.Exit();
 
             Boolean draggedToTableu = false;
+            Boolean draggedToFoundation = false;
 
-            // If dragging = false mouse left button is pressed, check if mouse is within card bounds.
+            // If not dragging and mouse left button is pressed, check if mouse is within card bounds.
             if (!dragging && (Mouse.GetState().LeftButton == ButtonState.Pressed))
             {
                 tempTableu = null;
                 temp = null;
 
-                // Create a reference rectangle for measurement reasons.
+                // Find original tableu
                 for (int i = 0; i < gameTableus.Count; i++)
                 {
                     if(gameTableus.ElementAt(i).contains(new Vector2(x,y)))
@@ -291,16 +315,17 @@ namespace HueHueBakersDozenSolitaire
                     }
                 }
 
-                if( tempTableu != null) temp = tempTableu.getTableuCard(tempTableu.getTableuSize()-1);
+                // If tableu is not empty then get the top card
+                if (tempTableu != null) temp = tempTableu.getTopCard();
 
-                // If card exist under mouse pointer.
+                // If card exist under mouse pointer pick up the card
                 if (temp!=null && tempTableu != null)
                 {
                     dragging = true;
                 }
             }
 
-            // Stop dragging if button is released and the last state of the button was pressed.
+            // Stop dragging if button is released.
             if (dragging && Mouse.GetState().LeftButton == ButtonState.Released)
             { 
                 dragging = false;
@@ -324,36 +349,81 @@ namespace HueHueBakersDozenSolitaire
                     }
                 }
 
-                if (draggedToTableu == false)
+                // Moving card to Foundation
+                for (int i = 0; i < gameFoundations.Count; i++)
+                {
+                    if (gameFoundations.ElementAt(i).contains(new Vector2(x, y)))
+                    {
+                        // If the foundation is empty and the card an Ace, allow it to be place on an empty foundation.
+                        if (gameFoundations.ElementAt(i).isEmpty() && temp.isAce())
+                        {
+                            // moved to a new Foundation
+                            gameFoundations.ElementAt(i).addCardToFoundation(temp);
+                            tempTableu.removeCard(temp);
+                            draggedToFoundation = true;
+                        }
+                        // else if the suit matched the foundation and it is one more than previous, allow it to be placed.
+                        else if (gameFoundations.ElementAt(i).getTopCard().suitMatches(temp) && gameFoundations.ElementAt(i).getTopCard().is1MoreThan(temp))
+                        {
+                            // moved to a new Foundation
+                            gameFoundations.ElementAt(i).addCardToFoundation(temp);
+                            tempTableu.removeCard(temp);
+                            draggedToFoundation = true;
+
+                        }
+                    }
+                }
+
+                // Return card to original location.
+                if (draggedToTableu == false && draggedToFoundation == false)
                 {
                     tempTableu.addCardToTableu(temp);
                     tempTableu.removeCard(temp);
                 }
 
-               
             }
 
+            DragCard();
+           
+
+            // remove all empty tableus
+            RemoveEmptyTableus();
+
+            // Debug: Where is the mouse, sprite, and vector at.
+             //try
+             //   {
+             //       System.Diagnostics.Debug.Print("Update: Mouse at: " + x + ", " + y + ". Card at: " + temp.getSprite().Bounds + ". Vector at: " + temp.getVector());
+             //   }
+             //   catch (Exception)
+             //   {
+             //       System.Diagnostics.Debug.Print("Update: Mouse at: " + x + ", " + y + ". Card is Null");
+             //   }
+
+            base.Update(gameTime);
+        }
+
+        private void DragCard()
+        {
             // Pick the card up and move to mouse location when left clicked if true
             if (dragging)
             {
-                if ((x > 0) && (y > 0) && (x + cardWidth/2 < screenWidth) && (y + cardHeight/2 < screenHeight + cardHeight/2))
+                if ((x > 0) && (y > 0) && (x + cardWidth / 2 < screenWidth) && (y + cardHeight / 2 < screenHeight + cardHeight / 2))
                 {
-                    Vector2 v = new Vector2(x- cardWidth/2, y - cardHeight/2);
+                    Vector2 v = new Vector2(x - cardWidth / 2, y - cardHeight / 2);
                     temp.setVector(v);
                 }
             }
-           
-            // Debug: Where is the mouse, sprite, and vector at.
-             try
-                {
-                    System.Diagnostics.Debug.Print("Update: Mouse at: " + x + ", " + y + ". Card at: " + temp.getSprite().Bounds + ". Vector at: " + temp.getVector());
-                }
-                catch (Exception)
-                {
-                    System.Diagnostics.Debug.Print("Update: Mouse at: " + x + ", " + y + ". Card is Null");
-                }
+        }
 
-            base.Update(gameTime);
+        private void RemoveEmptyTableus()
+        {
+            for (int i = 0; i < gameTableus.Count(); i++)
+            {
+                if (gameTableus.ElementAt(i).isEmpty())
+                {
+                    gameTableus.RemoveAt(i);
+                }
+            }
         }
 
         /// <summary>
@@ -362,37 +432,48 @@ namespace HueHueBakersDozenSolitaire
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            //
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
 
-            spriteBatch.Draw(BGT, BackgroundR, Color.White);
-            
-            //// Draw Deck
-            //for (int i = 0; i < 52; i = i + 1)
-            //{
-            //    spriteBatch.Draw(testDeck.getCard(i).getSprite(), testDeck.getCard(i).getVector(), Color.White);
-            //}
-
-            // Draw Tableus
-            for (int i = 0; i < gameTableus.Count; i++)
+            if (readyToPlay)
             {
-                for (int j = 0; j < gameTableus.ElementAt(i).getTableuSize(); j++)
+                GraphicsDevice.Clear(Color.CornflowerBlue);
+                spriteBatch.Begin();
+
+                spriteBatch.Draw(BGT, BackgroundR, Color.White);
+
+                // Draw Tableus
+                for (int i = 0; i < gameTableus.Count; i++)
                 {
-                    Card tempDraw = gameTableus.ElementAt(i).getTableuCard(j);
-                    spriteBatch.Draw(tempDraw.getSprite(), tempDraw.getVector(), Color.White);
+                    spriteBatch.Draw(gameTableus.ElementAt(i).getTableuTexture(), gameTableus.ElementAt(i).getTableuVector(), Color.White);
+
+                    for (int j = 0; j < gameTableus.ElementAt(i).getTableuSize(); j++)
+                    {
+                        Card tempDraw = gameTableus.ElementAt(i).getTableuCard(j);
+                        spriteBatch.Draw(tempDraw.getSprite(), tempDraw.getVector(), Color.White);
+                    }
                 }
+
+                // Draw Foundations
+                for (int i = 0; i < gameFoundations.Count; i++)
+                {
+                    spriteBatch.Draw(gameFoundations.ElementAt(i).getFoundationTexture(), gameFoundations.ElementAt(i).getFoundationVector(), Color.White);
+
+                    for (int j = 0; j < gameFoundations.ElementAt(i).getFoundationSize(); j++)
+                    {
+                        Card tempDraw = gameFoundations.ElementAt(i).getFoundationCard(j);
+                        spriteBatch.Draw(tempDraw.getSprite(), tempDraw.getVector(), Color.White);
+                    }
+                }
+
+                // Draw the card currently in hand
+                if (dragging && temp != null)
+                {
+                    spriteBatch.Draw(temp.getSprite(), temp.getVector(), Color.White);
+                }
+
+                spriteBatch.End();
+
+                base.Draw(gameTime); 
             }
-
-            // Draw the card currently in hand
-            if (dragging && temp != null)
-            {
-                spriteBatch.Draw(temp.getSprite(), temp.getVector(), Color.White);
-            }
-
-            spriteBatch.End();
-
-            base.Draw(gameTime);
         }
     }
 }
