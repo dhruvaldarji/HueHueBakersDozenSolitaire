@@ -93,5 +93,28 @@ namespace HueHueBakersDozenSolitaire
         {
             return cardList.Count;
         }
+
+        /// <summary>
+        /// randomizes the deck
+        /// </summary>
+        /// <param name="testDeck"></param>
+        /// <returns></returns>
+        public Deck swapCards(Deck testDeck)
+        {
+            int i = 0;
+            int k;
+            Deck tempDeck = new Deck();
+            Random rand = new Random();
+            while (i < 52)
+            {
+                i++;
+                k = rand.Next(0, testDeck.getDeckSize());
+                Card c = testDeck.getCard(k);
+                tempDeck.addCard(c);
+                testDeck.removeCard(k);
+            }
+            return tempDeck;
+        }
+
     }
 }

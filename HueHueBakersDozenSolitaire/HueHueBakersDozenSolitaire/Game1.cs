@@ -84,6 +84,8 @@ namespace HueHueBakersDozenSolitaire
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
         /// </summary>
+
+
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
@@ -104,6 +106,8 @@ namespace HueHueBakersDozenSolitaire
             readyToPlay = true;
 
         }
+
+      
 
         /// <summary>
         /// Load cards into testDeck
@@ -162,34 +166,10 @@ namespace HueHueBakersDozenSolitaire
             testDeck.addCard(new Card("Spades", 11, Content.Load<Texture2D>("SpadesJack")));
             testDeck.addCard(new Card("Spades", 12, Content.Load<Texture2D>("SpadesQueen")));
             testDeck.addCard(new Card("Spades", 13, Content.Load<Texture2D>("SpadesKing")));
+
         }
 
-        /// <summary>
-        /// Randomize the deck
-        /// </summary>
-        private void RandomizeDeck()
-        {
-
-            // Randomize deck
-            Random r = new Random();
-            int j = 0;
-            int[] randArray = new int[52];
-            while (j < 52)
-            {
-                int n = r.Next(0, 51);
-                if (n != randArray[j])
-                {
-                    testDeck.getCard(j).setVector(testCardPlacement[n]);
-                    j++;
-                }
-
-            }
-            for (int i = 0; i < 52; i++)
-            {
-
-                testDeck.getCard(i).setVector(testCardPlacement[i]);
-            }
-        }
+        
 
         /// <summary>
         /// Set up the tableus
@@ -197,6 +177,10 @@ namespace HueHueBakersDozenSolitaire
         private void SetupTableus()
         {
             // Texture for tableu
+
+            Deck randDeck = new Deck();
+            randDeck = testDeck.swapCards(testDeck);
+
             Texture2D tableuBG = Content.Load<Texture2D>("Empty2");
 
             // Make Tableus
@@ -214,16 +198,19 @@ namespace HueHueBakersDozenSolitaire
             gameTableus.Add(new Tableu(11, tableuBG, new Vector2(442, 275)));
             gameTableus.Add(new Tableu(12, tableuBG, new Vector2(534, 275)));
 
+
             // Add cards to tableu from testDeck
             for (int i = 0; i < gameTableus.Count; i++)
             {
                 for (int m = 0; m < 4; m++)
                 {
-                   // System.Diagnostics.Debug.Print(((4 * i) + m) + " - I: " + i + ", M: " + m + ", Adding Card: " + testDeck.getCard((4 * i) + m).toString() + " to Tableu " + (gameTableus.ElementAt(i).toString()));
                     // Add Card to Tableu
-                    gameTableus.ElementAt(i).addCardToTableu(testDeck.getCard((4 * i) + m));
+                    gameTableus.ElementAt(i).addCardToTableu(randDeck.getCard((4 * i) + m));
+                    
                 }
             }
+
+
 
             // Empty Deck by creating new instance.
             testDeck = new Deck();
