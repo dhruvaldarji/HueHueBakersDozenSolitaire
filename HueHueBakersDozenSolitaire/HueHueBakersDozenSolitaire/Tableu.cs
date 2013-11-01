@@ -217,7 +217,7 @@ namespace HueHueBakersDozenSolitaire
         /// <summary>
         /// If this tableu has a king in it, then make it the bottom most card.
         /// </summary>
-        public void makeKingBottom()
+        public void makeKingBottom(int j)
         {
             Card king = new Card();
             List<Card> tempTableu = new List<Card>();
@@ -225,7 +225,7 @@ namespace HueHueBakersDozenSolitaire
             Boolean isKing = false;
 
            // Find where king is
-            for (int i = 0; i < getTableuSize(); i++)
+            for (int i = j; i < getTableuSize(); i++)
             {
                 if (tableuList.ElementAt(i).isKing())
                 {

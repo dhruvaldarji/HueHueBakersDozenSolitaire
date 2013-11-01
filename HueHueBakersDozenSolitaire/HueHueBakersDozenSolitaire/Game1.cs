@@ -239,7 +239,10 @@ namespace HueHueBakersDozenSolitaire
             for (int i = 0; i < gameTableus.Count; i++)
             {
                 // Make it the first card in the tableu
-                gameTableus.ElementAt(i).makeKingBottom();
+                for (int j = 0; j < 3; j++)
+                {
+                    gameTableus.ElementAt(i).makeKingBottom(j);
+                }
             }
         }
 
