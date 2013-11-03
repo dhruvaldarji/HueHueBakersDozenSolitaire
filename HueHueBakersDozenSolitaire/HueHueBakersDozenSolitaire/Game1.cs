@@ -27,7 +27,7 @@ namespace HueHueBakersDozenSolitaire
         int y;
         int cardWidth = 72;
         int cardHeight = 97;
-        int screenWidth = 800;
+        int screenWidth = 870;
         int screenHeight = 480;
         Deck testDeck = new Deck();
         List<Tableu> gameTableus = new List<Tableu>();
@@ -38,6 +38,8 @@ namespace HueHueBakersDozenSolitaire
         Boolean readyToPlay = false;
         int playerScore = 500;
         SpriteFont gameFont; 
+        int scoreX = 10;
+        int scoreY = 450;
         ///////////////////////////////////////////////////
         
         public Game1()
@@ -470,9 +472,9 @@ namespace HueHueBakersDozenSolitaire
                
                 
                 //Code to display score; each card placed on tableu counts as 10 points
-                //spriteBatch = new SpriteBatch(GraphicsDevice);
-                //gameFont = Content.Load<SpriteFont>("Courier New");
-                //spriteBatch.DrawString(gameFont, playerScore.ToString(), new Vector2(10, 10), Color.White);
+            
+                gameFont = Content.Load<SpriteFont>("Courier New");
+                spriteBatch.DrawString(gameFont, playerScore.ToString(), new Vector2(scoreX, scoreY), Color.White);
 
                 spriteBatch.End();
 
