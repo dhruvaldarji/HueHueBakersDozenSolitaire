@@ -36,6 +36,8 @@ namespace HueHueBakersDozenSolitaire
         Tableu tempTableu;
         Vector2[] testCardPlacement = new Vector2[52];
         Boolean readyToPlay = false;
+        int playerScore = 500;
+        SpriteFont gameFont; 
         ///////////////////////////////////////////////////
         
         public Game1()
@@ -290,6 +292,12 @@ namespace HueHueBakersDozenSolitaire
             Boolean draggedToTableu = false;
             Boolean draggedToFoundation = false;
 
+            //Right clicking will check if selected card can fit on a tableu, and if so, will move to legal tableu
+           /* if (!dragging && (Mouse.GetState().RightButton == ButtonState.Pressed))
+           
+            * */
+
+
             // If not dragging and mouse left button is pressed, check if mouse is within card bounds.
             if (!dragging && (Mouse.GetState().LeftButton == ButtonState.Pressed))
             {
@@ -459,6 +467,12 @@ namespace HueHueBakersDozenSolitaire
                 {
                     spriteBatch.Draw(temp.getSprite(), temp.getVector(), Color.White);
                 }
+               
+                
+                //Code to display score; each card placed on tableu counts as 10 points
+                //spriteBatch = new SpriteBatch(GraphicsDevice);
+                //gameFont = Content.Load<SpriteFont>("Courier New");
+                //spriteBatch.DrawString(gameFont, playerScore.ToString(), new Vector2(10, 10), Color.White);
 
                 spriteBatch.End();
 
