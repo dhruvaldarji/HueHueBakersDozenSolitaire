@@ -36,10 +36,10 @@ namespace HueHueBakersDozenSolitaire
         Tableu tempTableu;
         Vector2[] testCardPlacement = new Vector2[52];
         Boolean readyToPlay = false;
-        int playerScore = 500;
+        int playerScore = 0;
         SpriteFont gameFont; 
-        int scoreX = 10;
-        int scoreY = 450;
+        int scoreDisplayX = 10;
+        int scoreDisplayY = 435;
         ///////////////////////////////////////////////////
         
         public Game1()
@@ -261,12 +261,13 @@ namespace HueHueBakersDozenSolitaire
                 {
                     counter++;
                 }
+                
             }
 
             if (counter == 3) return true;
             else return false;
         }
-
+        
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// all content.
@@ -361,6 +362,7 @@ namespace HueHueBakersDozenSolitaire
                             gameFoundations.ElementAt(i).addCardToFoundation(temp);
                             tempTableu.removeCard(temp);
                             draggedToFoundation = true;
+                            playerScore += 10;
                         }
                         // else if the suit matched the foundation and it is one more than previous, allow it to be placed.
                         else if (gameFoundations.ElementAt(i).getTopCard().suitMatches(temp) && gameFoundations.ElementAt(i).getTopCard().is1MoreThan(temp))
@@ -369,7 +371,7 @@ namespace HueHueBakersDozenSolitaire
                             gameFoundations.ElementAt(i).addCardToFoundation(temp);
                             tempTableu.removeCard(temp);
                             draggedToFoundation = true;
-
+                            playerScore += 10;
                         }
                     }
                 }
@@ -470,11 +472,11 @@ namespace HueHueBakersDozenSolitaire
                     spriteBatch.Draw(temp.getSprite(), temp.getVector(), Color.White);
                 }
                
-                
+             
                 //Code to display score; each card placed on tableu counts as 10 points
             
                 gameFont = Content.Load<SpriteFont>("Courier New");
-                spriteBatch.DrawString(gameFont, playerScore.ToString(), new Vector2(scoreX, scoreY), Color.White);
+                spriteBatch.DrawString(gameFont, "Score: \n" + playerScore.ToString(), new Vector2(scoreDisplayX, scoreDisplayY), Color.White);
 
                 spriteBatch.End();
 
