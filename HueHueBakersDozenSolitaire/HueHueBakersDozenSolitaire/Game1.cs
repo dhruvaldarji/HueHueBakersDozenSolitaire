@@ -2,12 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 
 namespace HueHueBakersDozenSolitaire
 {
@@ -48,10 +45,6 @@ namespace HueHueBakersDozenSolitaire
             Content.RootDirectory = "Content";
 
 
-            if (FoundationsAreFull())
-            {
-                // Win Game!!!!
-            }
         }
 
         /// <summary>
@@ -98,9 +91,6 @@ namespace HueHueBakersDozenSolitaire
 
             LoadCards();
 
-            // Still in testing
-            // RandomizeDeck();
-
             SetupTableus();
 
             SetupFoundations();
@@ -108,10 +98,9 @@ namespace HueHueBakersDozenSolitaire
             MoveKings();
 
             readyToPlay = true;
-
+ 
         }
-
-      
+             
 
         /// <summary>
         /// Load cards into testDeck
@@ -275,6 +264,7 @@ namespace HueHueBakersDozenSolitaire
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+
         }
 
         /// <summary>
@@ -284,6 +274,7 @@ namespace HueHueBakersDozenSolitaire
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            
             // get location of the mouse
             x = Mouse.GetState().X;
             y = Mouse.GetState().Y;
@@ -291,6 +282,17 @@ namespace HueHueBakersDozenSolitaire
             // Allows the game to exit
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
+
+            // Allows the game to reset
+            if (Keyboard.GetState().IsKeyDown(Keys.R))
+            {
+                readyToPlay = false;
+                this.gameTableus = new List<Tableu>(); ;
+                this.gameFoundations = new List<Foundation>(); ;
+                this.playerScore = 0;
+                this.Initialize();
+            }
+                
 
             Boolean draggedToTableu = false;
             Boolean draggedToFoundation = false;
@@ -403,7 +405,7 @@ namespace HueHueBakersDozenSolitaire
 
             base.Update(gameTime);
         }
-
+        
         private void DragCard()
         {
             // Pick the card up and move to mouse location when left clicked if true

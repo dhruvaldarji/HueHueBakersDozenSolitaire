@@ -9,6 +9,27 @@ namespace HueHueBakersDozenSolitaire
 {
     class Tableu
     {
+
+        /// <summary>
+        /// List of cards in Tableu
+        /// </summary>
+        public List<Card> tableuList;
+
+        /// <summary>
+        /// Name of Tableu
+        /// </summary>
+        public int tableuName;
+
+        /// <summary>
+        /// Texture of Tableu
+        /// </summary>
+        public Texture2D tableuTexture;
+
+        /// <summary>
+        /// Vector of Tableu
+        /// </summary>
+        public Vector2 tableuVector;
+
         /// <summary>
         /// Construct a new Tableu with Texture at Vector
         /// </summary>
@@ -33,26 +54,6 @@ namespace HueHueBakersDozenSolitaire
             tableuVector = v;
         }
         
-        /// <summary>
-        /// List of cards in Tableu
-        /// </summary>
-        public List<Card> tableuList;
-
-        /// <summary>
-        /// Name of Tableu
-        /// </summary>
-        public int tableuName;
-        
-        /// <summary>
-        /// Texture of Tableu
-        /// </summary>
-        public Texture2D tableuTexture;
-
-        /// <summary>
-        /// Vector of Tableu
-        /// </summary>
-        public Vector2 tableuVector;
-
         /// <summary>
         /// String representation of Tableu
         /// </summary>
@@ -90,6 +91,8 @@ namespace HueHueBakersDozenSolitaire
             }
 
             else c.setVector(new Vector2((int)tableuVector.X, (int)tableuVector.Y + (getTableuSize() * 20)));
+           
+            c.setTableu(tableuName);
 
             tableuList.Add(c);
         }
@@ -100,14 +103,7 @@ namespace HueHueBakersDozenSolitaire
         /// <param name="x"></param>
         public void removeCard(Card c)
         {
-            for (int i = 0; i < tableuList.Count; i++)
-            {
-                if (tableuList.ElementAt(i).Equals(c))
-                {
-                    tableuList.RemoveAt(i);
-                }
-            }
-
+            tableuList.RemoveAt(getTableuSize()-1);
         }
 
         /// <summary>

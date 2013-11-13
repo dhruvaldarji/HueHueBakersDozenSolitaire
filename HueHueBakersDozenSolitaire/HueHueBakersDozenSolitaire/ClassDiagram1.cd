@@ -3,28 +3,28 @@
   <Class Name="HueHueBakersDozenSolitaire.Card">
     <Position X="5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AEAAAAAACACCACAAAVIgBAAAAAAAQCAEAEAAAAIAAAA=</HashCode>
+      <HashCode>CEAAAARAAAECADAAgVIwBAAAAIAAUCAEAEAAAAAABAA=</HashCode>
       <FileName>Card.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="HueHueBakersDozenSolitaire.Tableu">
     <Position X="9.5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>ABAAAAAEAEAABEAADGCABAAAIAAAIEQAAKAAAAAAAAA=</HashCode>
+      <HashCode>ABAAAAAEAEAABUAADGCABAAAIAAAIEQAAKAAAAAAQAA=</HashCode>
       <FileName>Tableu.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="HueHueBakersDozenSolitaire.Deck">
     <Position X="7.25" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAEAACAAAAAAAABAAgAAAAAAAAQAAAAAAAAEACA=</HashCode>
+      <HashCode>AAAAAAEAACAAAAAAAABAAgAAAAAAAAQAAAAAAAgEACA=</HashCode>
       <FileName>Deck.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="HueHueBakersDozenSolitaire.Game1">
     <Position X="2.75" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AA4CEEAAAABAAwAIAAAAAAAAQAAAQAiIAABgQCCAAAQ=</HashCode>
+      <HashCode>AA4CEEAAAABAAwyIAADAgAAAQAATQAiIACBgQCCEAAQ=</HashCode>
       <FileName>Game1.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -38,7 +38,7 @@
   <Class Name="HueHueBakersDozenSolitaire.Foundation">
     <Position X="11.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gBRAACAAAAAAAAAAAACABAIAIAAABAQAAEAAAAqAAAA=</HashCode>
+      <HashCode>gBRAACAAAAAAAAAAAACABAIAIAAABAQAAEAACAqAQAA=</HashCode>
       <FileName>Foundation.cs</FileName>
     </TypeIdentifier>
   </Class>

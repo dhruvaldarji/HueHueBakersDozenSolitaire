@@ -13,6 +13,8 @@ namespace HueHueBakersDozenSolitaire
         String suit; // Suit (Spade, Club, Heart, Diamond)
         Texture2D cardSprite; // Image for the card
         Vector2 vector; // Vector for moving sprite
+        int currentTableu = -1;
+        int previousTableu = -1;
 
         /// <summary>
         /// Main Card Object.
@@ -223,6 +225,17 @@ namespace HueHueBakersDozenSolitaire
         {
             if (value == 13) return true;
             else return false; 
+        }
+
+        public int getTableu()
+        {
+            return currentTableu;
+        }
+
+
+        public void setTableu(int i){
+            previousTableu = currentTableu;
+            currentTableu = i;
         }
 
     }

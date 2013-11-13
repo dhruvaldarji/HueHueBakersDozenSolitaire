@@ -83,13 +83,15 @@ namespace HueHueBakersDozenSolitaire
         /// <param name="x"></param>
         public void removeCard(Card c)
         {
-            for (int i = 0; i < foundationList.Count; i++)
-            {
-                if (foundationList.ElementAt(i).Equals(c))
-                {
-                    foundationList.RemoveAt(i);
-                }
-            }
+            //for (int i = 0; i < foundationList.Count; i++)
+            //{
+            //    if (foundationList.ElementAt(i).Equals(c))
+            //    {
+            //        foundationList.RemoveAt(i);
+            //    }
+            //}
+
+            foundationList.RemoveAt(getFoundationSize() - 1);
 
         }
 
