@@ -37,6 +37,7 @@ namespace HueHueBakersDozenSolitaire
         SpriteFont gameFont; 
         int scoreDisplayX = 10;
         int scoreDisplayY = 435;
+        Boolean win = false;
         ///////////////////////////////////////////////////
         
         public Game1()
@@ -392,6 +393,16 @@ namespace HueHueBakersDozenSolitaire
 
             // remove all empty tableus
             RemoveEmptyTableus();
+            int count = 0;
+            //Check for Win
+            for (int i = 0; i < gameFoundations.Count; i++)
+            {
+                if (gameFoundations.ElementAt(i).isFull())
+                {
+                    count++;
+                }
+            }
+            if (count == 4) win = true;
 
             // Debug: Where is the mouse, sprite, and vector at.
              //try
@@ -479,6 +490,11 @@ namespace HueHueBakersDozenSolitaire
             
                 gameFont = Content.Load<SpriteFont>("Courier New");
                 spriteBatch.DrawString(gameFont, "Score: \n" + playerScore.ToString(), new Vector2(scoreDisplayX, scoreDisplayY), Color.White);
+
+                if (win)
+                {
+                    spriteBatch.DrawString(gameFont, "?? YOU WIN!!! Press 'R' to restart! ??", new Vector2(screenWidth/2, screenHeight/2), Color.White);
+                }
 
                 spriteBatch.End();
 
