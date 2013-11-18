@@ -119,6 +119,7 @@
     <Compile Include="Game1.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Cards\help.png" />
     <Content Include="bin\x86\Debug\HueHueBakersDozenSolitaire.exe" />
     <Content Include="bin\x86\Debug\HueHueBakersDozenSolitaire.pdb" />
     <Content Include="Cards\Back1.bmp" />

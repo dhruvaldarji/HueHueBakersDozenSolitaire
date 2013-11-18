@@ -37,7 +37,11 @@ namespace HueHueBakersDozenSolitaire
         SpriteFont gameFont; 
         int scoreDisplayX = 10;
         int scoreDisplayY = 435;
+        int winDisplayX = 200;
+        int winDisplayY = 240;
         Boolean win = false;
+        Boolean help = false;
+        Texture2D helpTexture;
         ///////////////////////////////////////////////////
         
         public Game1()
@@ -89,6 +93,8 @@ namespace HueHueBakersDozenSolitaire
             // Create a new SpriteBatch, which can be used to draw textures.
             BGT = Content.Load<Texture2D>("Untitled");
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            helpTexture = Content.Load<Texture2D>("help");
 
             LoadCards();
 
@@ -288,10 +294,21 @@ namespace HueHueBakersDozenSolitaire
             if (Keyboard.GetState().IsKeyDown(Keys.R))
             {
                 readyToPlay = false;
+                win = false;
                 this.gameTableus = new List<Tableu>(); ;
                 this.gameFoundations = new List<Foundation>(); ;
                 this.playerScore = 0;
                 this.Initialize();
+            }
+
+            // Allows the game to reset
+            if (Keyboard.GetState().IsKeyDown(Keys.H))
+            {
+                help = true;
+            }
+            else
+            {
+                help = false;
             }
                 
 
@@ -493,7 +510,12 @@ namespace HueHueBakersDozenSolitaire
 
                 if (win)
                 {
-                    spriteBatch.DrawString(gameFont, "?? YOU WIN!!! Press 'R' to restart! ??", new Vector2(screenWidth/2, screenHeight/2), Color.White);
+                    spriteBatch.DrawString(gameFont, "YOU WIN!!! Press 'R' to restart!", new Vector2(winDisplayX, winDisplayY), Color.White);
+                }
+
+                if (help)
+                {
+                    spriteBatch.Draw(helpTexture, new Vector2(50, 50), Color.White);
                 }
 
                 spriteBatch.End();
